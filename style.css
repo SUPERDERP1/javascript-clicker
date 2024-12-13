@@ -28,7 +28,7 @@ body {
 }
 
 .lineBreak::before {
-  content: "====================================================================================================";
+  content: "==============================================================================";
 }
 
 .lineBreak {
@@ -37,9 +37,10 @@ body {
 }
 
 #mainClicker {
+  color: #ffffff;
   font-size: 16px;
   font-family: var(--font-secondary);
-  border: 3px solid #ffffff;
+  border: 1.5px dotted #ffffff;
   background-color: #000000;
   padding: 10px 12px;
 }
