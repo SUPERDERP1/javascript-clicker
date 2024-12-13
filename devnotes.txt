@@ -1,3 +1,5 @@
 Fonts:
 1. VT323
 2. Rokkitt
+Notes:
+1. dont put anything inside of the lineBreak class
