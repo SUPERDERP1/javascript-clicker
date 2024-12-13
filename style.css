@@ -14,6 +14,7 @@ body {
 
 #content-wrap {
   padding: 0px 0px 0px 8px;
+  overflow: hidden;
 }
 
 #content {
