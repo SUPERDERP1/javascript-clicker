@@ -25,6 +25,7 @@ body {
   font-size: 56px;
   font-weight: bold;
   font-style: italic;
+  padding: -16px;
   margin: -20px;
 }
 
