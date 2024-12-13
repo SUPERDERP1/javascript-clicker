@@ -1,8 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100..900;1,100..900&family=VT323&display=swap'); /* VT323, Rokkitt */
 
+:root {
+  --font-main: "VT323";
+  --font-secondary: "Rokkitt";
+}
+
 body {
   color: #ffffff;
   background-color: #000000;
-  font-family: VT323;
+  font-family: var(--font-main);
   font-size: 16px;
+}
+
+.mainTitle {
+  font-family: var(--font-main);
+  font-size: 64px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.lineBreak {
+  color: #ffffff;
+  content: "====================================================================================================";
 }
