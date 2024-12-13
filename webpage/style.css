@@ -12,6 +12,14 @@ body {
   font-size: 16px;
 }
 
+#content-wrap {
+  /* styles tbd */
+}
+
+#content {
+  /* styles tbd */
+}
+
 .mainTitle {
   font-family: var(--font-main);
   font-size: 64px;
