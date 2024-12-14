@@ -55,11 +55,13 @@ body {
   background-color: transparent;
   border: 0px;
 }
-#inputReader, #inputReader:focus {
+#inputReader, #inputReader:focus, #inputReader::placeholder {
   background-color: transparent; 
   outline:none;
   font-family: var(--font-secondary);
-  font-size: 10px;
+  font-size: 25px;
   color:white;
-  caret: white block;
+  caret-color: white;
+  caret-shape: block;
+  width:100vw;
 }
