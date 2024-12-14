@@ -11,7 +11,7 @@ const cmds = [
     "switch(x) { case 1: semicolons += 10; break; default: semicolons += 5; }",
     "class SemicolonMaster { constructor() { this.semicolons = 50; } }"
 ]; // Main directory commands
-document.getElementById("text").addEventListener('paste',e=>e.preventDefault);
+document.getElementById("inputReader").addEventListener('paste',(event) => {event.preventDefault();});
 const shopCmds = [
     "buy: console.log(i need semicolons);",
     "buy: megaLoop;",
