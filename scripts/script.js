@@ -64,6 +64,10 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             return false;
         }
 
+
+        // Update pseudo console display (this needs to be before the input is cleared)
+        updatePseudoConsoleDisplay();
+        
         // Clear the input field
         inputField.value = "";
 
@@ -71,8 +75,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         updateSemicolonsDisplay();
         console.log("Current semicolons:", semicolons);
 
-        // Update pseudo console display
-        updatePseudoConsoleDisplay();
+        
     }
 });
 
@@ -84,5 +87,6 @@ function updateSemicolonsDisplay() {
 
 // Function that updates the pseudo console
 function updatePseudoConsoleDisplay(); {
-    document.getElementById("pseudoConsole").append(input);
+    let div = document.getElementById("pseudoConsole");
+    div.append(input);
 }
