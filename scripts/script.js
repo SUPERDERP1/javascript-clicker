@@ -13,7 +13,7 @@ const cmds = [
 ]; // Main directory commands
 
 const shopCmds = [
-    "buy: superSemicolon;",
+    "buy: console.log(i need semicolons);",
     "buy: megaLoop;",
     "buy: ultimateClass;"
 ]; // Commands available in the shop
