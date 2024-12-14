@@ -63,10 +63,6 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.error("Unknown command:", input);
             return false;
         }
-
-
-        // Update pseudo console display (this needs to be before the input is cleared)
-        updatePseudoConsoleDisplay();
         
         // Clear the input field
         inputField.value = "";
@@ -83,10 +79,4 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 function updateSemicolonsDisplay() {
     const display = document.getElementById("semicolonsDisplay");
     display.textContent = `Semicolons: ${semicolons}`;
-}
-
-// Function that updates the pseudo console
-function updatePseudoConsoleDisplay(); {
-    let div = document.getElementById("pseudoConsole");
-    div.append(input);
 }
