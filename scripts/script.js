@@ -56,8 +56,8 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else {
             // Invalid command for the current directory
             console.error("Unknown command:", input);
-            return false;
             inputField.value = "";
+            return false;
         }
 
         // Update the cmd history
