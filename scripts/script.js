@@ -2,10 +2,15 @@
 const cmds = [];
 let semicolons = 0;
 
-document.getElementById('inputReader').addEventListener("keydown", (event) => {
-    if (event.key === 'Enter') {
-        const input = document.getElementById('inputReader').value.trim();
-        cmds.push(input); // Add the entered command to cmds array
+// Handle form submission
+document.getElementById('inputForm').addEventListener("submit", (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    const inputField = document.getElementById('inputReader');
+    const input = inputField.value.trim(); // Get and trim the input value
+
+    if (input) {
+        cmds.push(input); // Add the command to the cmds array
 
         // Check the entered command and update semicolons
         if (input === "return;") {
@@ -25,12 +30,15 @@ document.getElementById('inputReader').addEventListener("keydown", (event) => {
         }
 
         // Clear the input field
-        document.getElementById('inputReader').value = '';
+        inputField.value = '';
+
+        // Log the current state
         console.log("Current semicolons:", semicolons);
+        console.log("Commands array:", cmds);
     }
 });
 
-// Function to add a new command to cmds
+// Function to add a new command programmatically
 function addCmds(command) {
     cmds.push(command);
 }
