@@ -39,10 +39,13 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else if (input === "cd shop") {
             // Change to the shop directory
             currentDirectory = "shop";
+            document.getElementById("directoryTitle").innerHTML = "shop/";
             console.log("You are now in the shop directory. Type 'dir' to see available commands.");
+            
         } else if (input === "cd main") {
             // Change to the main directory
             currentDirectory = "main";
+            document.getElementById("directoryTitle").innerHTML = "main/";
             console.log("You are now in the main directory. Type 'dir' to see available commands.");
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             // Process commands in the main directory
@@ -56,6 +59,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             return false;
         }
 
+        // Update the cmd history
+        document.getElementById("cmdHistory").innerHTML += input + "<br>";
+        
         // Clear the input field
         inputField.value = "";
     }
@@ -87,6 +93,8 @@ function processCommand(command) {
         semicolons += 30;
     }
     console.log("Command executed. Current semicolons:", semicolons);
+    updateSemicolonsDisplay();
+    
 }
 
 // Function to update semicolon display dynamically
