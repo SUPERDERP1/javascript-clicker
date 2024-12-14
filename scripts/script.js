@@ -57,6 +57,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             // Invalid command for the current directory
             console.error("Unknown command:", input);
             return false;
+            inputField.value = "";
         }
 
         // Update the cmd history
@@ -96,7 +97,7 @@ function processCommand(command) {
     updateSemicolonsDisplay();
     
 }
-
+document.getElementById("text").addEventListener('paste',e=>e.preventDefault)
 // Function to update semicolon display dynamically
 function updateSemicolonsDisplay() {
     const display = document.getElementById("semicolonsDisplay");
