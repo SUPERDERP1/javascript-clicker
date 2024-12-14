@@ -70,6 +70,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         // Update the semicolon display
         updateSemicolonsDisplay();
         console.log("Current semicolons:", semicolons);
+
+        // Update pseudo console display
+        updatePseudoConsoleDisplay();
     }
 });
 
@@ -77,4 +80,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 function updateSemicolonsDisplay() {
     const display = document.getElementById("semicolonsDisplay");
     display.textContent = `Semicolons: ${semicolons}`;
+}
+
+// Function that updates the pseudo console
+function updatePseudoConsoleDisplay(); {
+    document.getElementById("pseudoConsole").append(input);
 }
