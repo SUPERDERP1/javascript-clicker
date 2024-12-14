@@ -56,6 +56,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             return false;
         }
 
+        // Update the cmd history
+        document.getElementById("cmdHistory").innerHTML += "<br>" + input;
+        
         // Clear the input field
         inputField.value = "";
     }
@@ -87,7 +90,6 @@ function processCommand(command) {
         semicolons += 30;
     }
     console.log("Command executed. Current semicolons:", semicolons);
-    document.getElementById("cmdHistory").innerHTML += "<br>" + command;
     
 }
 
