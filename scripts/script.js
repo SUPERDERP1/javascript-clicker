@@ -10,8 +10,16 @@ const cmds = [
     "if(a > b) { return a; } else { return b; }",
     "switch(x) { case 1: semicolons += 10; break; default: semicolons += 5; }",
     "class SemicolonMaster { constructor() { this.semicolons = 50; } }"
-]; // Predefined commands
+]; // Main directory commands
+
+const shopCmds = [
+    "buy: superSemicolon;",
+    "buy: megaLoop;",
+    "buy: ultimateClass;"
+]; // Commands available in the shop
+
 let semicolons = 0; // Counter to track the number of semicolons
+let currentDirectory = "main"; // Track the current directory
 
 // Event listener for handling form submissions
 document.getElementById("inputForm").addEventListener("submit", (event) => {
@@ -21,59 +29,65 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
     const input = inputField.value.trim(); // Get the input value and trim extra spaces
 
     if (input) { // Ensure input is not empty
-        // Check if the command exists in the predefined cmds array
-        if (cmds.includes(input)) {
-            // Process the recognized command and update semicolons
-            if (input === "return;") {
-                // Adds 1 semicolon for a simple return statement
-                semicolons += 1;
-            } else if (input === "console.log(i need semicolons);") {
-                // Adds 3 semicolons for a console log statement
-                semicolons += 3;
-            } else if (input === "let semicolons = semicolons + 5;") {
-                // Adds 5 semicolons for using a variable assignment and addition
-                semicolons += 5;
-            } else if (input === "semicolons += 8;") {
-                // Adds 8 semicolons for shorthand addition
-                semicolons += 8;
-            } else if (input === "function giveMoney() {semicolons += 10;}") {
-                // Adds 12 semicolons for defining a function that modifies semicolons
-                semicolons += 12;
-            } else if (input === "if(money < 100000) {giveMoney();}") {
-                // Adds 15 semicolons for a conditional statement that calls a function
-                semicolons += 15;
-            } else if (input === "for(let i = 0; i < 10; i++) { semicolons += i; }") {
-                // Adds 20 semicolons for a for loop that iterates and updates semicolons
-                semicolons += 20;
-            } else if (input === "while(semicolons < 100) { semicolons += 5; }") {
-                // Adds 25 semicolons for a while loop that keeps adding until a condition is met
-                semicolons += 25;
-            } else if (input === "if(a > b) { return a; } else { return b; }") {
-                // Adds 18 semicolons for a conditional statement with an else clause
-                semicolons += 18;
-            } else if (input === "switch(x) { case 1: semicolons += 10; break; default: semicolons += 5; }") {
-                // Adds 22 semicolons for a switch statement with cases and a default
-                semicolons += 22;
-            } else if (input === "class SemicolonMaster { constructor() { this.semicolons = 50; } }") {
-                // Adds 30 semicolons for defining a class with a constructor
-                semicolons += 30;
+        if (input === "dir") {
+            // Display commands based on the current directory
+            if (currentDirectory === "main") {
+                console.log("Available commands in main directory:", cmds.concat(["cd shop"]));
+            } else if (currentDirectory === "shop") {
+                console.log("Available commands in shop:", shopCmds.concat(["cd main"]));
             }
+        } else if (input === "cd shop") {
+            // Change to the shop directory
+            currentDirectory = "shop";
+            console.log("You are now in the shop directory. Type 'dir' to see available commands.");
+        } else if (input === "cd main") {
+            // Change to the main directory
+            currentDirectory = "main";
+            console.log("You are now in the main directory. Type 'dir' to see available commands.");
+        } else if (currentDirectory === "main" && cmds.includes(input)) {
+            // Process commands in the main directory
+            processCommand(input);
+        } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
+            // Process commands in the shop directory
+            console.log(`Executed shop command: ${input}`);
         } else {
-            // Command not recognized; log an error and return false
+            // Invalid command for the current directory
             console.error("Unknown command:", input);
             return false;
         }
-        
+
         // Clear the input field
         inputField.value = "";
-
-        // Update the semicolon display
-        updateSemicolonsDisplay();
-        console.log("Current semicolons:", semicolons);
-
-        
     }
 });
+
+// Function to process recognized commands in the main directory
+function processCommand(command) {
+    if (command === "return;") {
+        semicolons += 1;
+    } else if (command === "console.log(i need semicolons);") {
+        semicolons += 3;
+    } else if (command === "let semicolons = semicolons + 5;") {
+        semicolons += 5;
+    } else if (command === "semicolons += 8;") {
+        semicolons += 8;
+    } else if (command === "function giveMoney() {semicolons += 10;}") {
+        semicolons += 12;
+    } else if (command === "if(money < 100000) {giveMoney();}") {
+        semicolons += 15;
+    } else if (command === "for(let i = 0; i < 10; i++) { semicolons += i; }") {
+        semicolons += 20;
+    } else if (command === "while(semicolons < 100) { semicolons += 5; }") {
+        semicolons += 25;
+    } else if (command === "if(a > b) { return a; } else { return b; }") {
+        semicolons += 18;
+    } else if (command === "switch(x) { case 1: semicolons += 10; break; default: semicolons += 5; }") {
+        semicolons += 22;
+    } else if (command === "class SemicolonMaster { constructor() { this.semicolons = 50; } }") {
+        semicolons += 30;
+    }
+    console.log("Command executed. Current semicolons:", semicolons);
+}
 
 // Function to update semicolon display dynamically
 function updateSemicolonsDisplay() {
