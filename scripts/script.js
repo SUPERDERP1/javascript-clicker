@@ -63,13 +63,15 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.error("Unknown command:", input);
             return false;
         }
-
+        
         // Clear the input field
         inputField.value = "";
 
         // Update the semicolon display
         updateSemicolonsDisplay();
         console.log("Current semicolons:", semicolons);
+
+        
     }
 });
 
