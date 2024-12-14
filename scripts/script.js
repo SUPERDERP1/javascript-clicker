@@ -11,7 +11,7 @@ const cmds = [
     "switch(x) { case 1: semicolons += 10; break; default: semicolons += 5; }",
     "class SemicolonMaster { constructor() { this.semicolons = 50; } }"
 ]; // Main directory commands
-document.getElementById("text").addEventListener('paste',e=>e.preventDefault);
+document.getElementById("inputReader").addEventListener('paste',(event) => {event.preventDefault();});
 const shopCmds = [
     "buy: console.log(i need semicolons);",
     "buy: megaLoop;",
@@ -28,6 +28,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
     const inputField = document.getElementById("inputReader"); // Input field for user commands
     const input = inputField.value.trim(); // Get the input value and trim extra spaces
 
+    // Clear the input field
+    inputField.value = "";
+    
     if (input) { // Ensure input is not empty
         if (input === "dir") {
             // Display commands based on the current directory
@@ -57,14 +60,10 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             // Invalid command for the current directory
             console.error("Unknown command:", input);
             return false;
-            inputField.value = "";
         }
 
-        // Update the cmd history
-        document.getElementById("cmdHistory").innerHTML += input + "<br>";
-        
-        // Clear the input field
-        inputField.value = "";
+        // Update the cmd history for valid cmds
+        document.getElementById("cmdHistory").innerHTML += input + "<br>"
     }
 });
 
