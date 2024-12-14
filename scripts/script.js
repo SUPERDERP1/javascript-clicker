@@ -58,6 +58,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
         // Update the cmd history
         document.getElementById("cmdHistory").innerHTML += "<br>" + input;
+        console.log(input);
         
         // Clear the input field
         inputField.value = "";
