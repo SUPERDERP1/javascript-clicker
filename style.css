@@ -22,7 +22,7 @@ body {
 }
 
 .directoryTitle {
-  font-family: var(--font-main);
+  font-family: var(--font-secondary);
   font-size: 56px;
   font-weight: bold;
   font-style: italic;
@@ -56,8 +56,7 @@ body {
   border: 0px;
 }
 #inputReader, #inputReader:focus {
-  background-color: transparent;
-  border: 0px;
+  background-color: transparent; 
   outline:none;
   font-family: var(--font-secondary);
   font-size: 10px;
