@@ -51,17 +51,21 @@ body {
   filter: invert(25%);
   cursor: pointer;
 }
+
 #inputReader {
   background-color: transparent;
   border: 0px;
 }
-#inputReader, #inputReader:focus, #inputReader::placeholder {
+
+#inputReader, 
+#inputReader:focus, 
+#inputReader::placeholder {
   background-color: transparent; 
-  outline:none;
+  outline: none;
   font-family: var(--font-secondary);
   font-size: 25px;
-  color:white;
+  color: white;
   caret-color: white;
   caret-shape: underscore;
-  width:90vw;
+  width: 90vw;
 }
