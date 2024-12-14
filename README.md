@@ -1,6 +1,7 @@
-use this as a chat for now
-added the thingy on vercel
+<h1>How to Play</h1>
 
-could you set up the github pages link too? vercel is 404ing me
++ Type a command you have unlocked into the input field
 
-use the google doc plz
++ Use semicolons gained from typing commands to unlock more commands
+
++ Repeat
