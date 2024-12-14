@@ -27,6 +27,7 @@ body {
   display: block;
   position: sticky;
   right: 0;
+  float: right;
   border-left: 1px double #ffffff;
 }
 
