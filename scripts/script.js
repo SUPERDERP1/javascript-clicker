@@ -28,6 +28,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
     const inputField = document.getElementById("inputReader"); // Input field for user commands
     const input = inputField.value.trim(); // Get the input value and trim extra spaces
 
+    // Clear the input field
+    inputField.value = "";
+    
     if (input) { // Ensure input is not empty
         if (input === "dir") {
             // Display commands based on the current directory
@@ -56,15 +59,11 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else {
             // Invalid command for the current directory
             console.error("Unknown command:", input);
-            inputField.value = "";
             return false;
         }
 
-        // Update the cmd history
-        document.getElementById("cmdHistory").innerHTML += input + "<br>";
-        
-        // Clear the input field
-        inputField.value = "";
+        // Update the cmd history for valid cmds
+        document.getElementById("cmdHistory").innerHTML += input + "<br>"
     }
 });
 
