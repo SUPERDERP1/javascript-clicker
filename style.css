@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100..900;1,100..900&family=VT323&display=swap'); /* VT323, Rokkitt */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap'); /* VT323, Ubuntu Mono */
 
 :root {
-  --font-main: "Rokkitt";
+  --font-main: "Ubuntu Mono";
   --font-secondary: "VT323";
 }
 
