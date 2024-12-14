@@ -87,6 +87,7 @@ function processCommand(command) {
         semicolons += 30;
     }
     console.log("Command executed. Current semicolons:", semicolons);
+    document.getElementById("cmdHistory").innerHTML += \n + "test";
     
 }
 
