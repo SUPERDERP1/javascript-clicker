@@ -58,7 +58,6 @@ body {
 #inputReader, #inputReader:focus {
   background-color: transparent;
   border: 0px;
-}
-#inputReader:focus {
-  color:red /*test*/
+  outline:none;
+  font-family: var(--font-secondary);
 }
