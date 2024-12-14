@@ -51,3 +51,7 @@ body {
   filter: invert(25%);
   cursor: pointer;
 }
+input[type="text"] {
+  background-color: transparent;
+  border: 0px;
+}
