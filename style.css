@@ -22,7 +22,7 @@ body {
 }
 
 .directoryTitle {
-  font-family: var(--font-secondary);
+  font-family: var(--font-main);
   font-size: 56px;
   font-weight: bold;
   font-style: italic;
@@ -62,6 +62,6 @@ body {
   font-size: 25px;
   color:white;
   caret-color: white;
-  caret-shape: block;
-  width:100vw;
+  caret-shape: underscore;
+  width:90vw;
 }
