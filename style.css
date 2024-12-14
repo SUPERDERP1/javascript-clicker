@@ -22,8 +22,8 @@ body {
 }
 
 .sideMenu {
- /* min-width: 15%; */
-  max-width: 450px;
+  height: 100%;
+  width: 450px;
   display: block;
   position: sticky;
   right: 0;
