@@ -51,7 +51,7 @@ body {
   filter: invert(25%);
   cursor: pointer;
 }
-input[type="text"] {
+#inputReader {
   background-color: transparent;
   border: 0px;
 }
