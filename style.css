@@ -60,4 +60,7 @@ body {
   border: 0px;
   outline:none;
   font-family: var(--font-secondary);
+  font-size: 10px;
+  color:white;
+  caret: white block;
 }
