@@ -15,14 +15,14 @@ const cmds = [
 // Commands available in the shop
 const shopCmds = [
     "buy: console.log('i need semicolons');",
-    "buy: megaLoop;",
-    "buy: ultimateClass;"
+    "buy: let semicolons = semicolons + 5;",
+    "buy: semicolons += 8;"
 ]; 
 
 // The array that is displayed in the shop dir for costs
 const shopCmdsCosts = [
     "buy: console.log('i need semicolons'); <span style='color:#0fe300;'>10 semicolons</span>",
-    "buy: megaLoop; <span style='color:#0fe300;'>25 semicolons</span>",
+    "buy: let semcolons = semicolons + 5; <span style='color:#0fe300;'>25 semicolons</span>",
     "buy: ultimateClass; <span style='color:#0fe300;'>100 semicolons</span>"
 ]; 
 
@@ -101,11 +101,11 @@ function processCommandShop(command) {
         cmds.push("console.log('i need semicolons');"); // adds the cmd you bought to your cmd list
         shopCmds.splice(shopCmds.indexOf("buy: console.log('i need semicolons');"), 1); // removes the ability to buy the cmd again 
         shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: console.log('i need semicolons'); <span style='color:#0fe300;'>10 semicolons</span>"), 1); // removes the cmd from the dir
-    } else if (command === "buy: megaLoop;" && semicolons >= 25) { //checks command you want to buy
+    } else if (command === "buy: let semicolons = semicolons + 5;" && semicolons >= 25) { //checks command you want to buy
         semicolons -= 25;
-        cmds.push("megaLoop;"); // adds the cmd you bought to your cmd list
-        shopCmds.splice(shopCmds.indexOf("buy: megaLoop;"), 1); // removes the ability to buy the cmd again 
-        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: megaLoop; <span style='color:#0fe300;'>25 semicolons</span>"), 1); // removes the cmd from the dir
+        cmds.push("let semicolons = semicolons + 5;"); // adds the cmd you bought to your cmd list
+        shopCmds.splice(shopCmds.indexOf("buy: let semicolons = semicolons + 5;"), 1); // removes the ability to buy the cmd again 
+        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: let semicolons = semicolons + 5;; <span style='color:#0fe300;'>25 semicolons</span>"), 1); // removes the cmd from the dir
     } else if (command === "buy: ultimateClass;" && semicolons >= 100) { //checks command you want to buy
         semicolons -= 100; 
         cmds.push("ultimateClass;"); // adds the cmd you bought to your cmd list
