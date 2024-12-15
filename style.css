@@ -21,6 +21,10 @@ body {
   /* styles tbd */
 }
 
+.main-content {
+  margin-top: 32px; 
+}
+
 .sideMenu {
   height: 100%;
   width: 450px;
