@@ -94,7 +94,7 @@ body {
 /*------------side-bar------------*/
 /*--------------------------------*/
 
-#ownedCmdsWrap, #ownedCmdsWrap a {
+#ownedCmdsWrap, #ownedCmdsWrap a, #semicolonsDisplay {
   text-wrap: nowrap;
   color: #fff;
 }
