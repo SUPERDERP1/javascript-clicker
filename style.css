@@ -70,7 +70,7 @@ body {
 
 #cmdHistory::before {
   white-space: pre;
-  content: "root@archiso ~ # ";
+  content: "";
 }
 
 #inputReader {
