@@ -43,7 +43,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             // Change to the shop directory
             if (currentDirectory === "credits") {document.getElementById("cmdHistory").innerHTML = "";}
             currentDirectory = "shop";
-            document.getElementById("directoryTitle").innerHTML = "shop/";
+            document.getElementById("directoryTitle").innerHTML = "main/shop/";
             console.log("You are now in the shop directory. Type 'dir' to see available commands.");
             
         } else if (input === "cd main") {
