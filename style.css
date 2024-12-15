@@ -23,6 +23,8 @@ body {
 
 .main-content {
   margin-top: 76px; 
+  width: calc(90vw - 450px);
+  overflow-x:scroll;
 }
 
 .sideMenu {
@@ -34,6 +36,7 @@ body {
   padding: 0px 0px 0px 2px;
   float: right;
   border-left: 1.5px double #ffffff;
+  overflow-x:scroll;
 }
 
 .topBar {
