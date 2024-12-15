@@ -20,7 +20,7 @@ const shopCmds = [
 // The array that is displayed in the shop dir for costs
 const shopCmdsCosts = [
     "buy: console.log('i need semicolons'); <span style='color:#0fe300;'>10 semicolons</span>",
-    "buy: let semcolons = semicolons + 5; <span style='color:#0fe300;'>15 semicolons</span>",
+    "buy: let semicolons = semicolons + 5; <span style='color:#0fe300;'>15 semicolons</span>",
     "buy: semicolons += 8; <span style='color:#0fe300;'>20 semicolons</span>"
 ]; 
 
@@ -100,12 +100,12 @@ function processCommandShop(command) {
         shopCmds.splice(shopCmds.indexOf("buy: console.log('i need semicolons');"), 1); // removes the ability to buy the cmd again 
         shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: console.log('i need semicolons'); <span style='color:#0fe300;'>10 semicolons</span>"), 1); // removes the cmd from the dir
     } else if (command === "buy: let semicolons = semicolons + 5;" && semicolons >= 15) { //checks command you want to buy
-        semicolons -= 25;
+        semicolons -= 15;
         cmds.push("let semicolons = semicolons + 5;"); // adds the cmd you bought to your cmd list
         shopCmds.splice(shopCmds.indexOf("buy: let semicolons = semicolons + 5;"), 1); // removes the ability to buy the cmd again 
         shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: let semicolons = semicolons + 5; <span style='color:#0fe300;'>15 semicolons</span>"), 1); // removes the cmd from the dir
     } else if (command === "buy: semicolons += 8;" && semicolons >= 20) { //checks command you want to buy
-        semicolons -= 100; 
+        semicolons -= 20; 
         cmds.push("semicolons += 8;"); // adds the cmd you bought to your cmd list
         shopCmds.splice(shopCmds.indexOf("buy: semicolons += 8;"), 1); // removes the ability to buy the cmd again 
         shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: semicolons += 8; <span style='color:#0fe300;'>20 semicolons</span>"), 1); // removes the cmd from the dir
