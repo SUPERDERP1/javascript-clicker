@@ -21,8 +21,6 @@ const shopCmds = [
 let semicolons = 0; // Counter to track the number of semicolons
 let currentDirectory = "main"; // Track the current directory
 
-ownedCmds("main"); //display owned cmds
-
 // Event listener for handling form submissions
 document.getElementById("inputForm").addEventListener("submit", (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
@@ -41,6 +39,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             } else if (currentDirectory === "shop") {
                 console.log("Available commands in shop:", shopCmds.concat(["cd main"]));
             }
+            ownedCmds(currentDirectory);
         } else if (input === "cd shop") {
             // Change to the shop directory
             if (currentDirectory === "credits") {document.getElementById("cmdHistory").innerHTML = "";}
@@ -71,7 +70,6 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.error("Unknown command:", input);
             return false;
         }
-        ownedCmds(currentDirectory);
         // Update the cmd history for valid cmds
         if (currentDirectory !== "credits") {
             document.getElementById("cmdHistory").innerHTML += input + "<br>"
