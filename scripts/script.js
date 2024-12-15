@@ -63,7 +63,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             // Process commands in the shop directory
-            if (processCommandShop(input) == "poor") {return;} else {processCommandShop(input)}
+            const bought = processCommandShop(input);
             console.log(`Executed shop command: ${input}`);
         } else if (input === "debug" /*this is for testing and will be removed later*/) {
             // Process commands in the shop directory
@@ -76,7 +76,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             return false;
         }
         // Update the cmd history for valid cmds
-        if (currentDirectory !== "credits") {
+        if (currentDirectory !== "credits" || bought !== "poor") {
             document.getElementById("cmdHistory").innerHTML += input + "<br>";
         }
         if (input !== "dir") {
