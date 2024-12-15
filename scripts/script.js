@@ -84,7 +84,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         }
         // Update the cmd history for valid cmds
         if (currentDirectory !== "credits" || bought !== "poor") {
-            document.getElementById("cmdHistory").innerHTML += '<span style="color:#db5454">'root'</span>'@archiso ~ # + " " + input + "<br>";
+            document.getElementById("cmdHistory").innerHTML += input + "<br>";
         }
         if (input !== "dir") {
             document.getElementById("ownedCmdsWrap").innerHTML = "";
