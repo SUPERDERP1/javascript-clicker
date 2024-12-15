@@ -80,7 +80,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 });
 
 // Function to process recognized commands in the main directory
-function processCommand(command) {
+function processCommandShop(command) {
     if (command === "buy: console.log(i need semicolons);") {
         if (semicolons >= 10) {
             semicolons -= 10;
@@ -114,8 +114,8 @@ function processCommand(command) {
     
 }
 // shop command function
-function processCommandShop(command) {
-    if (command === "console.log(i need semicolons);") {
+function processCommand(command) {
+    if (command === "return;") {
         semicolons += 1;
     } else if (command === "console.log(i need semicolons);") {
         semicolons += 3;
