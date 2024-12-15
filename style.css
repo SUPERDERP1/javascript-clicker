@@ -99,7 +99,9 @@ body {
   color: #fff;
 }
 /* styles the sidebar container that is used to close the bar*/
-
+#ownedCmdsWrap {
+  overflow-x: scroll;
+}
 
 #side-bar {
   display: block;
@@ -127,7 +129,6 @@ body {
   background-color: #000;
   height: 100%;
   width: 25em;
-  overflow-x: scroll;
 }
 
 /*:target means if it is hyperlinked to (notice how when you click side bar the link adds #side-bar)*/
