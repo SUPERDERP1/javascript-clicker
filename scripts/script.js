@@ -21,9 +21,9 @@ const shopCmds = [
 
 // The array that is displayed in the shop dir for costs
 const shopCmdsCosts = [
-    "buy: console.log('i need semicolons'); - 10 semicolons",
-    "buy: megaLoop; - 25 semicolons",
-    "buy: ultimateClass; - 100 semicolons"
+    "buy: console.log('i need semicolons'); <span stlye='color:#0fe300;'>10 semicolons</span>",
+    "buy: megaLoop; <span stlye='color:#0fe300;'>25 semicolons</span>",
+    "buy: ultimateClass; <span stlye='color:#0fe300;'>100 semicolons</span>"
 ]; 
 
 let semicolons = 0; // Counter to track the number of semicolons
@@ -100,17 +100,17 @@ function processCommandShop(command) {
         semicolons -= 10;
         cmds.push("console.log('i need semicolons');"); // adds the cmd you bought to your cmd list
         shopCmds.splice(shopCmds.indexOf("buy: console.log('i need semicolons');"), 1); // removes the ability to buy the cmd again 
-        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: console.log('i need semicolons'); - 10 semicolons"), 1); // removes the cmd from the dir
+        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: console.log('i need semicolons'); <span stlye='color:#0fe300;'>10 semicolons</span>"), 1); // removes the cmd from the dir
     } else if (command === "buy: megaLoop;" && semicolons >= 25) { //checks command you want to buy
         semicolons -= 25;
         cmds.push("megaLoop;"); // adds the cmd you bought to your cmd list
         shopCmds.splice(shopCmds.indexOf("buy: megaLoop;"), 1); // removes the ability to buy the cmd again 
-        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: megaLoop; - 25 semicolons"), 1); // removes the cmd from the dir
+        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: megaLoop; <span stlye='color:#0fe300;'>25 semicolons</span>"), 1); // removes the cmd from the dir
     } else if (command === "buy: ultimateClass;" && semicolons >= 100) { //checks command you want to buy
         semicolons -= 100; 
         cmds.push("ultimateClass;"); // adds the cmd you bought to your cmd list
         shopCmds.splice(shopCmds.indexOf("buy: ultimateClass;"), 1); // removes the ability to buy the cmd again 
-        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: ultimateClass; - 100 semicolons"), 1); // removes the cmd from the dir
+        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: ultimateClass; <span stlye='color:#0fe300;'>100 semicolons</span>"), 1); // removes the cmd from the dir
     } else {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor"; //used to stop the cmd from appearing
