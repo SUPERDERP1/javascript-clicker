@@ -64,6 +64,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             // Process commands in the shop directory
             processCommandShop(input);
+            if (processCommandShop(input) == "poor") {return;}
             console.log(`Executed shop command: ${input}`);
         } else if (input === "debug" /*this is for testing and will be removed later*/) {
             // Process commands in the shop directory
@@ -95,6 +96,7 @@ function processCommandShop(command) {
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
+            return "poor";
         }
     } else if (command === "buy: megaLoop;") {
         if (semicolons >= 25) {
@@ -104,6 +106,7 @@ function processCommandShop(command) {
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
+            return "poor";
         }
     } else if (command === "buy: ultimateClass;") {
         if (semicolons >= 100) {
@@ -113,6 +116,7 @@ function processCommandShop(command) {
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
+            return "poor";
         }
     }
     console.log("Command executed. Current semicolons:", semicolons);
