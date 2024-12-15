@@ -58,8 +58,8 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             document.getElementById("directoryTitle").innerHTML = "main/";
             console.log("You are now in the main directory. Type 'dir' to see available commands.");
         } else if (input === "cd credits"){
-            currentDirectory = "main/credits/";
-            document.getElementById("directoryTitle").innerHTML = "credits/";
+            currentDirectory = "credits";
+            document.getElementById("directoryTitle").innerHTML = "main/credits/";
             document.getElementById("cmdHistory").innerHTML = "Made by Airplane, Max Verstappen, and G I R A F F E";
             console.log("Made by Airplane, Max Verstappen, and G I R A F F E");
         
