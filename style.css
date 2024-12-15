@@ -25,7 +25,8 @@ body {
   height: 100%;
   width: 450px;
   display: block;
-  position: fixed;
+  position: sticky;
+  right: 0;
   padding: 0px 0px 0px 2px;
   float: right;
   border-left: 1.5px double #ffffff;
