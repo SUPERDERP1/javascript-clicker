@@ -63,7 +63,6 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             // Process commands in the shop directory
-            processCommandShop(input);
             if (processCommandShop(input) == "poor") {return;}
             console.log(`Executed shop command: ${input}`);
         } else if (input === "debug" /*this is for testing and will be removed later*/) {
