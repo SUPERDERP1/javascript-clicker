@@ -41,12 +41,14 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             }
         } else if (input === "cd shop") {
             // Change to the shop directory
+            if (currentDirectory === "credits") {document.getElementById("cmdHistory").innerHTML = "";}
             currentDirectory = "shop";
             document.getElementById("directoryTitle").innerHTML = "shop/";
             console.log("You are now in the shop directory. Type 'dir' to see available commands.");
             
         } else if (input === "cd main") {
             // Change to the main directory
+            if (currentDirectory === "credits") {document.getElementById("cmdHistory").innerHTML = "";}
             currentDirectory = "main";
             document.getElementById("directoryTitle").innerHTML = "main/";
             console.log("You are now in the main directory. Type 'dir' to see available commands.");
@@ -70,7 +72,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
         // Update the cmd history for valid cmds
         if (currentDirectory !== "credits") {
-        document.getElementById("cmdHistory").innerHTML += input + "<br>"
+            document.getElementById("cmdHistory").innerHTML += input + "<br>"
         }
     }
 });
