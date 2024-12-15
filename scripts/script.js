@@ -116,9 +116,20 @@ function updateSemicolonsDisplay() {
 //Function to update/display owned cmd list
 function ownedCmds(directory) {
     let dir;
-    if (directory === "main") {dir = cmds.concat(["cd shop", "cd credits"])} else if (directory === "shop") {dir = shopCmds.concat(["cd main", "cd credits"])} else if (directory === "credits") {dir = ["cd main", "cd shop"]}; 
-    document.getElementById("ownedCmds").innerHTML = "";
-    for i in range(0,(Size(dir) - 1)) {
-        document.getElementById("ownedCmds").innerHTML += dir[i] + "<br>";
+    
+    if (directory === "main") {
+        dir = cmds.concat(["cd shop", "cd credits"]);
+    } else if (directory === "shop") {
+        dir = shopCmds.concat(["cd main", "cd credits"]);
+    } else if (directory === "credits") {
+        dir = ["cd main", "cd shop"];
+    } else {
+        console.error(directory," is an invalid directory");
+        return;
     }
+    let output = "";
+    for (let i = 0; i < dir.length; i++) {
+        output += dir[i] + "<br>";
+    }
+    document.getElementById("ownedCmds").innerHTML = output;
 }
