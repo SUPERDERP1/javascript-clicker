@@ -94,9 +94,11 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
 // Function to process recognized commands in the shop directory
 function processCommandShop(command) {
-    if (command === "buy: console.log('i need semicolons');") { //checks command you want to buy
-        const bought = buyCmdShop("buy: console.log('i need semicolons');", 10);
-        if (bought = "poor") {return "poor";}
+    if (command === "buy: console.log('i need semicolons');" && semicolons >= 10) { //checks command you want to buy
+        semicolons -= 10;
+        cmds.push("console.log('i need semicolons');"); // adds the cmd you bought to your cmd list
+        shopCmds.splice(shopCmds.indexOf("buy: console.log('i need semicolons');"), 1); // removes the ability to buy the cmd again 
+        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: console.log('i need semicolons'); <span style='color:#0fe300;'>10 semicolons</span>"), 1); // removes the cmd from the dir
     } else if (command === "buy: let semicolons = semicolons + 5;" && semicolons >= 15) { //checks command you want to buy
         semicolons -= 25;
         cmds.push("let semicolons = semicolons + 5;"); // adds the cmd you bought to your cmd list
@@ -115,6 +117,9 @@ function processCommandShop(command) {
     updateSemicolonsDisplay();
     
 }
+/*
+GOING TO FIX THIS LATER I HAVE TO GET BACK FROM SKIING
+nothing is broken with buying rn
 function buyCmdShop(command, cost) {
     if (semicolons >= cost) { //checks command you want to buy
         semicolons -= cost;
@@ -126,7 +131,7 @@ function buyCmdShop(command, cost) {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor"; //used to stop the cmd from appearing
     }
-}
+}*/
 // Function to process recognized commands in the main directory
 function processCommand(command) {
     if (command === "return;") {
