@@ -93,16 +93,25 @@ body {
 /*--------------------------------*/
 /*------------side-bar------------*/
 /*--------------------------------*/
-
-#ownedCmdsWrap, #ownedCmdsWrap a, #semicolonsDisplay, #semicolonsDisplay a {
-  text-wrap: nowrap;
-  color: #fff;
+.side-bar-container {
+  float: right;
+  padding: 0px 0px 0px 2px;
+  border-left: 1.5px double #ffffff;
+  background-color: #000;
+  height: 100%;
+  width: 450px;
+  z-index:20;
 }
-/* styles the sidebar container that is used to close the bar*/
-#ownedCmdsWrap {
-  overflow-x: scroll;
+@media only screen and (min-width: 901px) {
+  .open-menu {
+    display:none;
+  } 
+  .side-bar-container {
+    display: block;
+    position: fixed;
+  }
 }
-
+@media only screen and (max-width: 900px) {
 #side-bar {
   display: block;
   position: fixed; 
@@ -118,17 +127,12 @@ body {
   border: none !important;
   text-decoration: none !important;
   outline: none !important;
-
 }
 
 /* styles the visible side bar */
 .side-bar-container {
-  float: right;
-  padding: 0px 0px 0px 2px;
-  border-left: 1.5px double #ffffff;
-  background-color: #000;
-  height: 100%;
-  width: 25em;
+  width: 90vw;
+  z-index:120;
 }
 
 /*:target means if it is hyperlinked to (notice how when you click side bar the link adds #side-bar)*/
@@ -155,5 +159,15 @@ body {
   color: #FFF !important;
   text-decoration: none;
 }
+}
+#ownedCmdsWrap, #ownedCmdsWrap a, #semicolonsDisplay, #semicolonsDisplay a {
+  text-wrap: nowrap;
+  color: #fff;
+}
+/* styles the sidebar container that is used to close the bar*/
+#ownedCmdsWrap {
+  overflow-x: scroll;
+}
+
 
 
