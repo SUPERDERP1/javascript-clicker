@@ -130,5 +130,5 @@ function ownedCmds(directory) {
     for (let i = 0; i < dir.length; i++) {
         output += dir[i] + "<br>";
     }
-    document.getElementById("ownedCmds").innerHTML = output;
+    document.getElementById("ownedCmdsWrap").innerHTML = "Owned Commands for " + currentDirectory + ":<br>" + output;
 }
