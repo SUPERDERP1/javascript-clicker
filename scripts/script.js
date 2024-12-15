@@ -58,7 +58,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             document.getElementById("directoryTitle").innerHTML = "main/";
             console.log("You are now in the main directory. Type 'dir' to see available commands.");
         } else if (input === "cd credits"){
-            currentDirectory = "credits";
+            currentDirectory = "main/credits/";
             document.getElementById("directoryTitle").innerHTML = "credits/";
             document.getElementById("cmdHistory").innerHTML = "Made by Airplane, Max Verstappen, and G I R A F F E";
             console.log("Made by Airplane, Max Verstappen, and G I R A F F E");
@@ -84,7 +84,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         }
         // Update the cmd history for valid cmds
         if (currentDirectory !== "credits" || bought !== "poor") {
-            document.getElementById("cmdHistory").innerHTML += input + "<br>";
+            document.getElementById("cmdHistory").innerHTML += '<span style="color:#db5454">'root'</span>'@archiso ~ # + " " + input + "<br>";
         }
         if (input !== "dir") {
             document.getElementById("ownedCmdsWrap").innerHTML = "";
