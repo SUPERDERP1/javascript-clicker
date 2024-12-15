@@ -65,6 +65,11 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             // Process commands in the shop directory
             processCommandShop(input);
             console.log(`Executed shop command: ${input}`);
+        } else if (input === "debug" /*this is for testing and will be removed later*/) {
+            // Process commands in the shop directory
+            semicolons += 10000;
+            console.log("Command executed. Current semicolons:", semicolons);
+            updateSemicolonsDisplay();
         } else {
             // Invalid command for the current directory
             console.error("Unknown command:", input);
@@ -86,7 +91,7 @@ function processCommandShop(command) {
         if (semicolons >= 10) {
             semicolons -= 10;
             cmds.push("console.log(i need semicolons);");
-            shopCmds.splice(0, 1);
+            shopCmds.splice(shopCmds.indexOf("buy: console.log(i need semicolons);"), 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
@@ -95,7 +100,7 @@ function processCommandShop(command) {
         if (semicolons >= 25) {
             semicolons -= 25;
             cmds.push("megaLoop;");
-            shopCmds.splice(1, 1);
+            shopCmds.splice(shopCmds.indexOf("buy: megaLoop;"), 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
@@ -104,7 +109,7 @@ function processCommandShop(command) {
         if (semicolons >= 100) {
             semicolons -= 100;
             cmds.push("ultimateClass;");
-            shopCmds.splice(2, 1);
+            shopCmds.splice(shopCmds.indeOf("buy: ultimateClass;"), 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
