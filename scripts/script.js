@@ -12,7 +12,6 @@ const cmds = [
     "class SemicolonMaster { constructor() { this.semicolons = 50; } }"
 ]; // Main directory commands
 document.getElementById("inputReader").addEventListener('paste',(event) => {event.preventDefault();});
-ownedCmds("main");
 const shopCmds = [
     "buy: console.log(i need semicolons);",
     "buy: megaLoop;",
@@ -21,6 +20,8 @@ const shopCmds = [
 
 let semicolons = 0; // Counter to track the number of semicolons
 let currentDirectory = "main"; // Track the current directory
+
+ownedCmds("main"); //display owned cmds
 
 // Event listener for handling form submissions
 document.getElementById("inputForm").addEventListener("submit", (event) => {
@@ -117,11 +118,11 @@ function updateSemicolonsDisplay() {
 function ownedCmds(directory) {
     let dir;
     
-    if (directory === "main") {
+    if (directory == "main") {
         dir = cmds.concat(["cd shop", "cd credits"]);
-    } else if (directory === "shop") {
+    } else if (directory == "shop") {
         dir = shopCmds.concat(["cd main", "cd credits"]);
-    } else if (directory === "credits") {
+    } else if (directory == "credits") {
         dir = ["cd main", "cd shop"];
     } else {
         console.error(directory," is an invalid directory");
