@@ -78,10 +78,12 @@ body {
 
 .main-content {
   margin-top: 76px; 
-  width: calc(90vw - 450px);
+  width: calc(100vw - 450px);
   overflow-x:scroll;
 }
-
+#cmdHistory {
+  text-wrap:nowrap;
+}
 #cmdHistory::before {
   white-space: pre;
   content: "";
