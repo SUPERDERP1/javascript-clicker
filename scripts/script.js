@@ -26,7 +26,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
     const inputField = document.getElementById("inputReader"); // Input field for user commands
     const input = inputField.value.trim(); // Get the input value and trim extra spaces
-
+    let bought;
     // Clear the input field
     inputField.value = "";
     
@@ -63,7 +63,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             // Process commands in the shop directory
-            const bought = processCommandShop(input);
+            bought = processCommandShop(input);
+            document.getElementById("ownedCmdsWrap").innerHTML = "";
+            if (bought == "poor") {return;}
             console.log(`Executed shop command: ${input}`);
         } else if (input === "debug" /*this is for testing and will be removed later*/) {
             // Process commands in the shop directory
