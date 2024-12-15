@@ -13,19 +13,19 @@
         <h1 class="directoryTitle" id="directoryTitle">main/</h1>
         <span class="lineBreak"></span><br>
       </div>  
-      <div class="sideMenu">
+      <div class="sideMenu" id="sideMenu">
         <p id="semicolonsDisplay"></p>
+        <p id="ownedCmdsWrap" style="whitespace:pre;">
+          <p id="ownedCmds"></p>
+        </p>
       </div>
       <div class="main-content">
         <p id="cmdHistory"></p>
          <!--format this but keep the id tag-->
           <form id="inputForm">
-          <input style="filter:opacity(40%); font-style:italic; margin:0px!important;" type="text" id="inputReader" placeholder="enter command" />
-          <!--<button type="submit">Submit</button>-->
+            <input style="filter:opacity(40%); font-style:italic; margin:0px!important;" type="text" id="inputReader" placeholder="enter command" />
           </form>
-        <p id="semicolonsDisplay"></p>
-        <p id="ownedCmdsWrap" style="whitespace:pre;">
-          <p id="ownedCmds"></p>
+        <!--<p id="semicolonsDisplay"></p>-->
       </div>
     </div>
   </div>
