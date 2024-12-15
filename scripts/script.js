@@ -58,7 +58,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             currentDirectory = "credits";
             document.getElementById("directoryTitle").innerHTML = "credits/";
             document.getElementById("cmdHistory").innerHTML = "Made by Airplane, Max Verstappen, and G I R A F F E";
-            console.log("Made by Airplane, Max Verstappen, and G I R A F F E")
+            console.log("Made by Airplane, Max Verstappen, and G I R A F F E");
         
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             // Process commands in the main directory
