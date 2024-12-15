@@ -12,9 +12,14 @@ const cmds = [
 ]; // Main directory commands
 document.getElementById("inputReader").addEventListener('paste',(event) => {event.preventDefault();});
 const shopCmds = [
-    "buy(10): console.log(i need semicolons);",
+    "buy: console.log(i need semicolons);",
     "buy: megaLoop;",
     "buy: ultimateClass;"
+]; // Commands available in the shop
+const shopCmdsCosts = [
+    "buy: console.log(i need semicolons); - 10 semicolons",
+    "buy: megaLoop; - 25 semicolons",
+    "buy: ultimateClass; - 100 semicolons"
 ]; // Commands available in the shop
 
 let semicolons = 0; // Counter to track the number of semicolons
@@ -94,6 +99,7 @@ function processCommandShop(command) {
             semicolons -= 10;
             cmds.push("console.log(i need semicolons);");
             shopCmds.splice(shopCmds.indexOf("buy: console.log(i need semicolons);"), 1);
+            shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: console.log(i need semicolons); - 10 semicolons"), 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
@@ -104,7 +110,7 @@ function processCommandShop(command) {
             semicolons -= 25;
             cmds.push("megaLoop;");
             shopCmds.splice(shopCmds.indexOf("buy: megaLoop;"), 1);
-            
+            shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: megaLoop; - 25 semicolons"), 1);
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
             return "poor";
@@ -114,6 +120,7 @@ function processCommandShop(command) {
             semicolons -= 100;
             cmds.push("ultimateClass;");
             shopCmds.splice(shopCmds.indexOf("buy: ultimateClass;"), 1);
+            shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: ultimateClass; - 100 semicolons"), 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
@@ -172,7 +179,7 @@ function ownedCmds(directory) {
     if (directory == "main") {
         dir = cmds.concat(["cd shop", "cd credits"]);
     } else if (directory == "shop") {
-        dir = shopCmds.concat(["cd main", "cd credits"]);
+        dir = shopCmdsCosts.concat(["cd main", "cd credits"]);
     } else if (directory == "credits") {
         dir = ["cd main", "cd shop"];
     } else {
