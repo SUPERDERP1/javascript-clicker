@@ -26,8 +26,9 @@ body {
   width: 450px;
   display: block;
   position: sticky;
+  padding: 0px 0px 0px 2px;
   float: right;
-  border-left: 1px double #ffffff;
+  border-left: 1.5px double #ffffff;
 }
 
 .topBar {
