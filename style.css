@@ -94,8 +94,9 @@ body {
 /*------------side-bar------------*/
 /*--------------------------------*/
 
-#ownedCmdsWrap {
+#ownedCmdsWrap, #ownedCmdsWrap a {
   text-wrap: nowrap;
+  color: #fff;
 }
 /* styles the sidebar container that is used to close the bar*/
 
@@ -152,19 +153,6 @@ body {
   text-align: center;
   color: #FFF !important;
   text-decoration: none;
-}
-/* gives the ≡ a shadow when hovered */
-.open-menu:hover {
-  background-color: rgba(200, 200, 200, 0.1);
-  border-radius: 50em;
-  box-shadow: 2px 2px 5px rgba(255,255,255,0.3);
-}
-/* styles the embedded side bar page */
-.embed-bar {
-  border: none;
-  width: 17em;
-  overflow-y: visible;
-  height:100%;
 }
 
 
