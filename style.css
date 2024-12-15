@@ -41,7 +41,7 @@ body {
   font-size: 56px;
   font-weight: bold;
   font-style: italic;
-  margin: -12px;
+  margin: 0px 0px -12px 2px;
 }
 
 .lineBreak::before {
