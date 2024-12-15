@@ -12,7 +12,7 @@ const cmds = [
 ]; // Main directory commands
 document.getElementById("inputReader").addEventListener('paste',(event) => {event.preventDefault();});
 const shopCmds = [
-    "buy: console.log(i need semicolons);",
+    "buy(10): console.log(i need semicolons);",
     "buy: megaLoop;",
     "buy: ultimateClass;"
 ]; // Commands available in the shop
