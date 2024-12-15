@@ -96,7 +96,7 @@ body {
 
 .sideMenu {
   height: 100%;
-  width: 450px
+  width: 450px;
   display: block;
   position: fixed;
   right: 0;
