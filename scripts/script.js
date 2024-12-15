@@ -109,7 +109,7 @@ function processCommandShop(command) {
         if (semicolons >= 100) {
             semicolons -= 100;
             cmds.push("ultimateClass;");
-            shopCmds.splice(shopCmds.indeOf("buy: ultimateClass;"), 1);
+            shopCmds.splice(shopCmds.indexOf("buy: ultimateClass;"), 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
