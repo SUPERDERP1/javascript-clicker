@@ -58,8 +58,6 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             document.getElementById("cmdHistory").innerHTML = "Made by Airplane, Max Verstappen, and G I R A F F E";
             console.log("Made by Airplane, Max Verstappen, and G I R A F F E");
         
-        } else if (input === "clearDir" /*cmd temporary for testing purposes*/) {
-            document.getElementById("ownedCmdsWrap").innerHTML = "";
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             // Process commands in the main directory
             processCommand(input);
@@ -76,6 +74,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         if (currentDirectory !== "credits") {
             document.getElementById("cmdHistory").innerHTML += input + "<br>";
         }
+        if (input !== "dir") {
+            document.getElementById("ownedCmdsWrap").innerHTML = "";
+        }
     }
 });
 
@@ -85,7 +86,7 @@ function processCommandShop(command) {
         if (semicolons >= 10) {
             semicolons -= 10;
             cmds.push("console.log(i need semicolons);");
-            shopCmds.splice(shopCmds.indexOf("buy: console.log(i need semicolons);"));
+            shopCmds.splice(0);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
@@ -94,7 +95,7 @@ function processCommandShop(command) {
         if (semicolons >= 25) {
             semicolons -= 25;
             cmds.push("megaLoop;");
-            shopCmds.splice(shopCmds.indexOf("buy: megaLoop;"));
+            shopCmds.splice(1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
@@ -103,7 +104,7 @@ function processCommandShop(command) {
         if (semicolons >= 100) {
             semicolons -= 100;
             cmds.push("ultimateClass;");
-            shopCmds.splice(shopCmds.indexOf("buy: ultimateClass;"));
+            shopCmds.splice(2);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
