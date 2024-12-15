@@ -12,6 +12,7 @@ const cmds = [
     "class SemicolonMaster { constructor() { this.semicolons = 50; } }"
 ]; // Main directory commands
 document.getElementById("inputReader").addEventListener('paste',(event) => {event.preventDefault();});
+ownedCmds("main");
 const shopCmds = [
     "buy: console.log(i need semicolons);",
     "buy: megaLoop;",
@@ -69,7 +70,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.error("Unknown command:", input);
             return false;
         }
-
+        ownedCmds(currentDirectory);
         // Update the cmd history for valid cmds
         if (currentDirectory !== "credits") {
             document.getElementById("cmdHistory").innerHTML += input + "<br>"
@@ -111,4 +112,13 @@ function processCommand(command) {
 function updateSemicolonsDisplay() {
     const display = document.getElementById("semicolonsDisplay");
     display.textContent = `Semicolons: ${semicolons}`;
+}
+//Function to update/display owned cmd list
+function ownedCmds(directory) {
+    let dir;
+    if (directory === "main") {dir = cmds.concat(["cd shop", "cd credits"])} else if (directory === "shop") {dir = shopCmds.concat(["cd main", "cd credits"])} else if (directory === "credits") {dir = ["cd main", "cd shop"]}; 
+    document.getElementById("ownedCmds").innerHTML = "";
+    for i in range(0,(Size(dir) - 1)) {
+        document.getElementById("ownedCmds").innerHTML += dir[i] + "<br>";
+    }
 }
