@@ -38,7 +38,9 @@ body {
   padding: 0px 0px 0px 2px;
   float: right;
   border-left: 1.5px double #ffffff;
-  overflow-x:scroll;
+  overflow-x: scroll;
+  background-color: #000;
+  z-index: 20;
 }
 
 #ownedCmdsWrap {
