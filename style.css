@@ -68,9 +68,9 @@ body {
   cursor: pointer;
 }
 
-#inputReader::before {
+#cmdHistory::before {
   white-space: pre;
-  content: "root@archiso ~ #";
+  content: "root@archiso ~ # ";
 }
 
 #inputReader {
