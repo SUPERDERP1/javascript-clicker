@@ -120,6 +120,8 @@ function processCommand(command) {
         semicolons += 1;
     } else if (command === "console.log(i need semicolons);") {
         semicolons += 3;
+    } else if (command === "megaLoop;") {
+        semicolons += 10;
     } else if (command === "let semicolons = semicolons + 5;") {
         semicolons += 5;
     } else if (command === "semicolons += 8;") {
@@ -138,6 +140,11 @@ function processCommand(command) {
         semicolons += 22;
     } else if (command === "class SemicolonMaster { constructor() { this.semicolons = 50; } }") {
         semicolons += 30;
+    } else if (command === "ultimateClass;") {
+        semicolons += 50;
+    } else {
+        console.error("command not recognized");
+        return;
     }
     console.log("Command executed. Current semicolons:", semicolons);
     updateSemicolonsDisplay();
