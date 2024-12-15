@@ -86,7 +86,7 @@ function processCommandShop(command) {
         if (semicolons >= 10) {
             semicolons -= 10;
             cmds.push("console.log(i need semicolons);");
-            shopCmds.splice(0);
+            shopCmds.splice(0, 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
@@ -95,7 +95,7 @@ function processCommandShop(command) {
         if (semicolons >= 25) {
             semicolons -= 25;
             cmds.push("megaLoop;");
-            shopCmds.splice(1);
+            shopCmds.splice(1, 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
@@ -104,7 +104,7 @@ function processCommandShop(command) {
         if (semicolons >= 100) {
             semicolons -= 100;
             cmds.push("ultimateClass;");
-            shopCmds.splice(2);
+            shopCmds.splice(2, 1);
             
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
