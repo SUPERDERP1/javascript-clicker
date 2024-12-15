@@ -25,28 +25,6 @@ body {
   /* styles tbd */
 }
 
-/*--------------------------------*/
-/*------------side-bar------------*/
-/*--------------------------------*/
-
-.sideMenu {
-  height: 100%;
-  width: 450px;
-  display: block;
-  position: fixed;
-  right: 0;
-  padding: 0px 0px 0px 2px;
-  float: right;
-  border-left: 1.5px double #ffffff;
-  overflow-x: scroll;
-  background-color: #000;
-  z-index: 20;
-}
-
-#ownedCmdsWrap {
-  text-wrap: nowrap;
-}
-
 /*-------------------------------*/
 /*------------top-bar------------*/
 /*-------------------------------*/
@@ -109,17 +87,29 @@ body {
   width: 90vw;
 }
 
-/* #mainClicker {
-  color: #ffffff;
-  font-size: 16px;
-  font-family: var(--font-secondary);
-  border: 1.5px dotted #ffffff;
-  background-color: #000000;
-  padding: 10px 12px;
+/*--------IN-PROGRESS----------*/
+
+
+/*--------------------------------*/
+/*------------side-bar------------*/
+/*--------------------------------*/
+
+.sideMenu {
+  height: 100%;
+  width: 450px
+  display: block;
+  position: fixed;
+  right: 0;
+  padding: 0px 0px 0px 2px;
+  float: right;
+  border-left: 1.5px double #ffffff;
+  overflow-x: scroll;
+  background-color: #000;
+  z-index: 20;
 }
 
-#mainClicker:hover {
-  filter: invert(25%);
-  cursor: pointer;
-} */
+#ownedCmdsWrap {
+  text-wrap: nowrap;
+}
+/* styles the sidebar container that is used to close the bar*/
 
