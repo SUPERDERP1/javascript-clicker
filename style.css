@@ -109,9 +109,13 @@ body {
   .side-bar-container {
     display: block;
     position: fixed;
+    right:0;
   }
 }
 @media only screen and (max-width: 900px) {
+.main-content {
+  width:100%;
+}
 #side-bar {
   display: block;
   position: fixed; 
