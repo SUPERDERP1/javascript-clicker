@@ -1,8 +1,6 @@
 // Main directory commands
 const cmds = [
     "return;",
-    "let semicolons = semicolons + 5;",
-    "semicolons += 8;",
     "function giveMoney() {semicolons += 10;}",
     "if(money < 100000) {giveMoney();}",
     "for(let i = 0; i < 10; i++) { semicolons += i; }",
@@ -22,8 +20,8 @@ const shopCmds = [
 // The array that is displayed in the shop dir for costs
 const shopCmdsCosts = [
     "buy: console.log('i need semicolons'); <span style='color:#0fe300;'>10 semicolons</span>",
-    "buy: let semcolons = semicolons + 5; <span style='color:#0fe300;'>25 semicolons</span>",
-    "buy: ultimateClass; <span style='color:#0fe300;'>100 semicolons</span>"
+    "buy: let semcolons = semicolons + 5; <span style='color:#0fe300;'>15 semicolons</span>",
+    "buy: semicolons += 8; <span style='color:#0fe300;'>20 semicolons</span>"
 ]; 
 
 let semicolons = 0; // Counter to track the number of semicolons
@@ -96,21 +94,19 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
 // Function to process recognized commands in the shop directory
 function processCommandShop(command) {
-    if (command === "buy: console.log('i need semicolons');" && semicolons >= 10) { //checks command you want to buy
-        semicolons -= 10;
-        cmds.push("console.log('i need semicolons');"); // adds the cmd you bought to your cmd list
-        shopCmds.splice(shopCmds.indexOf("buy: console.log('i need semicolons');"), 1); // removes the ability to buy the cmd again 
-        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: console.log('i need semicolons'); <span style='color:#0fe300;'>10 semicolons</span>"), 1); // removes the cmd from the dir
-    } else if (command === "buy: let semicolons = semicolons + 5;" && semicolons >= 25) { //checks command you want to buy
+    if (command === "buy: console.log('i need semicolons');") { //checks command you want to buy
+        const bought = buyCmdShop("buy: console.log('i need semicolons');", 10);
+        if (bought = "poor") {return "poor";}
+    } else if (command === "buy: let semicolons = semicolons + 5;" && semicolons >= 15) { //checks command you want to buy
         semicolons -= 25;
         cmds.push("let semicolons = semicolons + 5;"); // adds the cmd you bought to your cmd list
         shopCmds.splice(shopCmds.indexOf("buy: let semicolons = semicolons + 5;"), 1); // removes the ability to buy the cmd again 
-        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: let semicolons = semicolons + 5;; <span style='color:#0fe300;'>25 semicolons</span>"), 1); // removes the cmd from the dir
-    } else if (command === "buy: ultimateClass;" && semicolons >= 100) { //checks command you want to buy
+        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: let semicolons = semicolons + 5; <span style='color:#0fe300;'>15 semicolons</span>"), 1); // removes the cmd from the dir
+    } else if (command === "buy: semicolons += 8;" && semicolons >= 20) { //checks command you want to buy
         semicolons -= 100; 
-        cmds.push("ultimateClass;"); // adds the cmd you bought to your cmd list
-        shopCmds.splice(shopCmds.indexOf("buy: ultimateClass;"), 1); // removes the ability to buy the cmd again 
-        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: ultimateClass; <span style='color:#0fe300;'>100 semicolons</span>"), 1); // removes the cmd from the dir
+        cmds.push("semicolons += 8;"); // adds the cmd you bought to your cmd list
+        shopCmds.splice(shopCmds.indexOf("buy: semicolons += 8;"), 1); // removes the ability to buy the cmd again 
+        shopCmdsCosts.splice(shopCmdsCosts.indexOf("buy: semicolons += 8; <span style='color:#0fe300;'>20 semicolons</span>"), 1); // removes the cmd from the dir
     } else {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor"; //used to stop the cmd from appearing
@@ -118,6 +114,18 @@ function processCommandShop(command) {
     console.log("Command executed. Current semicolons:", semicolons);
     updateSemicolonsDisplay();
     
+}
+function buyCmdShop(command, cost) {
+    if (semicolons >= cost) { //checks command you want to buy
+        semicolons -= cost;
+        const textCmd = command.split("buy: ");
+        cmds.push(textCmd[1]); // adds the cmd you bought to your cmd list
+        shopCmds.splice(shopCmds.indexOf(command), 1); // removes the ability to buy the cmd again 
+        shopCmdsCosts.splice(shopCmdsCosts.indexOf(command + " <span style='color:#0fe300;'>" + cost +" semicolons</span>"), 1); // removes the cmd from the dir
+    } else {
+        document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
+        return "poor"; //used to stop the cmd from appearing
+    }
 }
 // Function to process recognized commands in the main directory
 function processCommand(command) {
