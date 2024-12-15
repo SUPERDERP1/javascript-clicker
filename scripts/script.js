@@ -59,6 +59,8 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             document.getElementById("cmdHistory").innerHTML = "Made by Airplane, Max Verstappen, and G I R A F F E";
             console.log("Made by Airplane, Max Verstappen, and G I R A F F E");
         
+        } else if (input === "clearDir" /*cmd temporary for testing purposes*/) {
+            document.getElementById("ownedCmdsWrap").innerHTML = "";
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             // Process commands in the main directory
             processCommand(input);
@@ -72,7 +74,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         }
         // Update the cmd history for valid cmds
         if (currentDirectory !== "credits") {
-            document.getElementById("cmdHistory").innerHTML += input + "<br>"
+            document.getElementById("cmdHistory").innerHTML += input + "<br>";
         }
     }
 });
