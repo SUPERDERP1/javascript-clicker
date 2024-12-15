@@ -1,6 +1,5 @@
 const cmds = [
     "return;",
-    "console.log(i need semicolons);",
     "let semicolons = semicolons + 5;",
     "semicolons += 8;",
     "function giveMoney() {semicolons += 10;}",
@@ -66,6 +65,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             // Process commands in the shop directory
+            processCommandShop(input);
             console.log(`Executed shop command: ${input}`);
         } else {
             // Invalid command for the current directory
@@ -81,7 +81,41 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
 // Function to process recognized commands in the main directory
 function processCommand(command) {
-    if (command === "return;") {
+    if (command === "buy: console.log(i need semicolons);") {
+        if (semicolons >= 10) {
+            semicolons -= 10;
+            cmds.push("console.log(i need semicolons);");
+            shopCmds.splice(shopCmds.indexOf("buy: console.log(i need semicolons);"));
+            
+        } else {
+            document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
+        }
+    } else if (command === "buy: megaLoop;") {
+        if (semicolons >= 25) {
+            semicolons -= 25;
+            cmds.push("megaLoop;");
+            shopCmds.splice(shopCmds.indexOf("buy: megaLoop;"));
+            
+        } else {
+            document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
+        }
+    } else if (command === "buy: ultimateClass;") {
+        if (semicolons >= 100) {
+            semicolons -= 100;
+            cmds.push("ultimateClass;");
+            shopCmds.splice(shopCmds.indexOf("buy: ultimateClass;"));
+            
+        } else {
+            document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
+        }
+    }
+    console.log("Command executed. Current semicolons:", semicolons);
+    updateSemicolonsDisplay();
+    
+}
+// shop command function
+function processCommandShop(command) {
+    if (command === "console.log(i need semicolons);") {
         semicolons += 1;
     } else if (command === "console.log(i need semicolons);") {
         semicolons += 3;
@@ -106,9 +140,8 @@ function processCommand(command) {
     }
     console.log("Command executed. Current semicolons:", semicolons);
     updateSemicolonsDisplay();
-    
 }
-
+    
 // Function to update semicolon display dynamically
 function updateSemicolonsDisplay() {
     const display = document.getElementById("semicolonsDisplay");
