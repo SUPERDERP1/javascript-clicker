@@ -45,7 +45,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             document.getElementById("directoryTitle").innerHTML = "shop/";
             console.log("You are now in the shop directory. Type 'dir' to see available commands.");
             
-        } else if (input === "cd main") {
+        } else if (input === "cd main"|"cd/") {
             // Change to the main directory
             currentDirectory = "main";
             document.getElementById("directoryTitle").innerHTML = "main/";
