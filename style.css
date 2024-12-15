@@ -1,3 +1,7 @@
+/*------------------------------*/
+/*-------------main-------------*/
+/*------------------------------*/
+
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap'); /* VT323, Ubuntu Mono */
 
 :root {
@@ -21,11 +25,9 @@ body {
   /* styles tbd */
 }
 
-.main-content {
-  margin-top: 76px; 
-  width: calc(90vw - 450px);
-  overflow-x:scroll;
-}
+/*--------------------------------*/
+/*------------side-bar------------*/
+/*--------------------------------*/
 
 .sideMenu {
   height: 100%;
@@ -38,6 +40,14 @@ body {
   border-left: 1.5px double #ffffff;
   overflow-x:scroll;
 }
+
+#ownedCmdsWrap {
+  text-wrap: nowrap;
+}
+
+/*-------------------------------*/
+/*------------top-bar------------*/
+/*-------------------------------*/
 
 .topBar {
   position: fixed;
@@ -62,18 +72,14 @@ body {
   margin: 10px 0px 10px 0px;
 }
 
-#mainClicker {
-  color: #ffffff;
-  font-size: 16px;
-  font-family: var(--font-secondary);
-  border: 1.5px dotted #ffffff;
-  background-color: #000000;
-  padding: 10px 12px;
-}
+/* ------------------------------------ */
+/* -------------main-content------------*/
+/*--------------------------------------*/
 
-#mainClicker:hover {
-  filter: invert(25%);
-  cursor: pointer;
+.main-content {
+  margin-top: 76px; 
+  width: calc(90vw - 450px);
+  overflow-x:scroll;
 }
 
 #cmdHistory::before {
@@ -98,3 +104,18 @@ body {
   caret-shape: underscore;
   width: 90vw;
 }
+
+/* #mainClicker {
+  color: #ffffff;
+  font-size: 16px;
+  font-family: var(--font-secondary);
+  border: 1.5px dotted #ffffff;
+  background-color: #000000;
+  padding: 10px 12px;
+}
+
+#mainClicker:hover {
+  filter: invert(25%);
+  cursor: pointer;
+} */
+
