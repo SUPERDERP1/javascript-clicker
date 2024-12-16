@@ -12,14 +12,14 @@ const allCmds = {
     "class SemicolonMaster { constructor() { this.semicolons = 50; } }": 60,
 };
 
+// Available commands (unlocked by default)
+let availableCmds = ["return;", "cd shop", "cd credits", "dir"];
+
 // Populate shop commands and costs dynamically
 const shopCmds = Object.keys(allCmds).map(cmd => `buy: ${cmd}`);
 const shopCmdsCosts = Object.entries(allCmds).map(
     ([cmd, cost]) => `buy: ${cmd} <span style='color:#0fe300;'>${cost} semicolons</span>`
 );
-
-// Main commands array dynamically derived from `allCmds`
-const cmds = Object.keys(allCmds);
 
 // Initialize variables
 let semicolons = 0;
@@ -67,7 +67,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             document.getElementById("cmdHistory").innerHTML =
                 "Made by Airplane, Max Verstappen, and G I R A F F E";
             console.log("Made by Airplane, Max Verstappen, and G I R A F F E");
-        } else if (currentDirectory === "main" && cmds.includes(input)) {
+        } else if (currentDirectory === "main" && availableCmds.includes(input)) {
             processCommand(input); // Process commands in the main directory
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             const bought = processCommandShop(input); // Process shop commands
@@ -96,12 +96,16 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
 // Function to process commands in the main directory
 function processCommand(command) {
-    if (allCmds[command]) {
+    if (command === "return;") {
+        semicolons += 1; // Default command gives 1 semicolon
+        console.log(`Command executed: ${command}. Current semicolons: ${semicolons}`);
+        updateSemicolonsDisplay();
+    } else if (allCmds[command]) {
         semicolons += allCmds[command]; // Add semicolons based on command value
         console.log(`Command executed: ${command}. Current semicolons: ${semicolons}`);
         updateSemicolonsDisplay();
     } else {
-        console.error("Command not recognized"); // Fallback for unlisted commands
+        console.error("Command not recognized or locked.");
     }
 }
 
@@ -110,7 +114,7 @@ function buyCmdShop(command, cost) {
     if (semicolons >= cost) {
         semicolons -= cost;
         const textCmd = command.split("buy: ")[1];
-        cmds.push(textCmd); // Add the purchased command to the main command list
+        availableCmds.push(textCmd); // Add the purchased command to the available commands
         shopCmds.splice(shopCmds.indexOf(command), 1); // Remove from shop
         shopCmdsCosts.splice(shopCmdsCosts.indexOf(command), 1); // Remove cost display
         console.log(`Purchased and unlocked command: ${textCmd}`);
@@ -146,7 +150,7 @@ function ownedCmds(directory) {
 
     // Get the command list for the directory
     if (directory === "main") {
-        dir = cmds.concat(["cd shop", "cd credits"]);
+        dir = availableCmds;
         console.log("Available commands in main directory:", dir);
     } else if (directory === "shop") {
         dir = shopCmdsCosts.concat(["cd main", "cd credits"]);
