@@ -1,4 +1,5 @@
 const allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
+    //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command
     {cmd:"console.log('i need semicolons');", cost:10, profit:3},
     {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
@@ -24,8 +25,8 @@ const allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST T
 const cmds = ["return;"];
 
 // Shop commands and their costs
-const shopCmdsSetup = allCmds.filter(item => !cmds.includes(item.cmd));
-const shopCmds = shopCmdsSetup.map((item) => "buy: " + item.cmd);
+const shopCmdsSetup = allCmds.filter(item => !cmds.includes(item.cmd)); //excludes the return; from shop list
+const shopCmds = shopCmdsSetup.map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 
 let semicolons = 0;
 let currentDirectory = "main";
@@ -80,15 +81,14 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
 // Function to handle shop purchases
 function processCommandShop(command) {
-    const cmdText = command.split("buy: ")[1];
-    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost;
+    const cmdText = command.split("buy: ")[1]; //finds the original command code which can interface with allCmds
+    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost; //finds the object in all Cmds that corresponds to the command and extracts the cost
 
     if (semicolons >= cost) {
         semicolons -= cost;
         cmds.push(cmdText); // Add to available commands
         const shopIndex = shopCmds.indexOf(command);
         shopCmds.splice(shopIndex, 1); // Remove from shop
-        //shopCmdsCosts.splice(shopIndex, 1); // Remove from shop costs
     } else {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor";
@@ -100,10 +100,9 @@ function processCommandShop(command) {
 
 // Function to process main directory commands
 function processCommand(command) {
-    const using = allCmds.find(item => item.cmd === command);
+    const using = allCmds.find(item => item.cmd === command); //extracts the object in allCmds corresponding to the command
     if (using) {
-        semicolons += using.profit;
-        //console.log(`Executed: ${command}. Semicolons rewarded: ${allCmds[command]}`);
+        semicolons += using.profit; //finds the amount of money gained using said object
     } else {
         console.error("Command not recognized:", command);
     }
@@ -124,8 +123,9 @@ function ownedCmds(directory) {
     if (directory === "main") {
         dir = cmds.concat(["cd shop", "cd credits"]);
     } else if (directory === "shop") {
+        //This line is very long. It takes every item in shop commands and adds the semicolon cost in green to the end
         const dirSetup = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>");
-        dir = dirSetup.concat(["cd main", "cd credits"]);
+        dir = dirSetup.concat(["cd main", "cd credits"]); //just adds cd main and cd credits to the command list
     } else if (directory === "credits") {
         dir = ["cd main", "cd shop"];
     } else {
