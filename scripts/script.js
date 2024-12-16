@@ -52,7 +52,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             changeDirectory("credits");
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             processCommand(input);
-        } else if (currentDirectory === "shop" && shopCmds.includes(input) {
+        } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             const bought = processCommandShop(input);
             if (bought === "poor") {
                 return; // Prevent logging invalid purchases
@@ -81,7 +81,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 // Function to handle shop purchases
 function processCommandShop(command) {
     const cmdText = command.split("buy: ")[1];
-    const cost = allCmds.find(item => item.cmd === command).cost;
+    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost;
 
     if (semicolons >= cost) {
         semicolons -= cost;
@@ -124,7 +124,7 @@ function ownedCmds(directory) {
     if (directory === "main") {
         dir = cmds.concat(["cd shop", "cd credits"]);
     } else if (directory === "shop") {
-        const dirSetup = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>";
+        const dirSetup = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>");
         dir = dirSetup.concat(["cd main", "cd credits"]);
     } else if (directory === "credits") {
         dir = ["cd main", "cd shop"];
