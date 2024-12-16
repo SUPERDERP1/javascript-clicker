@@ -139,7 +139,7 @@ function changeDirectory(directory) {
     }
 
     currentDirectory = directory;
-    document.getElementById("directoryTitle").innerHTML = `main/${directory}/`;
+    document.getElementById("directoryTitle").innerHTML = `${directory}/`;
 
     if (directory === "credits") {
         document.getElementById("cmdHistory").innerHTML = "Made by Airplane, Max Verstappen, and G I R A F F E";
