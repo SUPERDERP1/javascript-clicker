@@ -3,3 +3,4 @@ Fonts:
 2. Ubuntu Mono
 Notes:
 1. dont put anything inside of the lineBreak class
+2. to create a new command, all you have to do is add an object to the allCmds array. (see the example in the js)
