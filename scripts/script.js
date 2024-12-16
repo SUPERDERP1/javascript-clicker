@@ -52,7 +52,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             changeDirectory("credits");
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             processCommand(input);
-        } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
+        } else if (currentDirectory === "shop" && shopCmds[input] !== undefined) {
             const bought = processCommandShop(input);
             if (bought === "poor") return; // Prevent logging invalid purchases
         } else if (input === "debug") {
@@ -82,7 +82,7 @@ function processCommandShop(command) {
     const cost = allCmds[cmdText];
 
     if (semicolons >= cost) {
-        semicolons - cost;
+        semicolons -= cost;
         cmds.push(cmdText); // Add to available commands
         const shopIndex = shopCmds.indexOf(cmdText);
         shopCmds.splice(shopIndex, 1); // Remove from shop
