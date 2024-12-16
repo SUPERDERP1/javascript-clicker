@@ -1,4 +1,4 @@
-const allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
+let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command
     {cmd:"console.log('i need semicolons');", cost:10, profit:3},
@@ -22,7 +22,7 @@ const allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST T
 ];
 
 // Starting commands (only "return;" is available by default)
-const cmds = ["return;"];
+let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
 const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 
@@ -62,7 +62,8 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         }else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
 
             document.getElementById("directoryTitle").innerHTML = "ooo secrets";
-            const allCmds = [];
+            let allCmds = [];
+            let cmds = [];
             let semicolons = -1000000000000000000000000000000000000000000000000000000000000000000000;
             updateSemicolonsDisplay();
         } else {
