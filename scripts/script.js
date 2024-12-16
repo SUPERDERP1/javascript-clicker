@@ -26,7 +26,6 @@ const cmds = ["return;"];
 // Shop commands and their costs
 const shopCmdsSetup = allCmds.filter(item => !cmds.includes(item.cmd));
 const shopCmds = shopCmdsSetup.map((item) => "buy: " + item.cmd);
-const shopCmdsCosts = shopCmds.map();
 
 let semicolons = 0;
 let currentDirectory = "main";
@@ -53,7 +52,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             changeDirectory("credits");
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             processCommand(input);
-        } else if (currentDirectory === "shop" && shopCmds.some(item => item.cmd === input)) {
+        } else if (currentDirectory === "shop" && shopCmds.includes(input) {
             const bought = processCommandShop(input);
             if (bought === "poor") {
                 return; // Prevent logging invalid purchases
