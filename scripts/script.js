@@ -61,10 +61,10 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             updateSemicolonsDisplay();
         }else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
 
-            document.getElementById("directoryTitle").innerHTML = "ooo secrets"
+            document.getElementById("directoryTitle").innerHTML = "ooo secrets";
             const allCmds = [];
             let semicolons = -1000000000000000000000000000000000000000000000000000000000000000000000;
-
+            updateSemicolonsDisplay();
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Command</span>" + "<br>";
             console.error("Unknown command:", input);
