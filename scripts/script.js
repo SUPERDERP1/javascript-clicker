@@ -23,16 +23,15 @@ const allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST T
 
 // Starting commands (only "return;" is available by default)
 const cmds = ["return;"];
-
-// Shop commands and their costs
-const shopCmdsSetup = allCmds.filter(item => !cmds.includes(item.cmd)); //excludes the return; from shop list
-const shopCmds = shopCmdsSetup.map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+const directories = ["main", "shop", "credits"];
+//const shopCmdsSetup = allCmds.filter(item => !cmds.includes(item.cmd)); //excludes the return; from shop list
+const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 
 let semicolons = 0;
 let currentDirectory = "main";
 
 // Prevents pasting commands
-document.getElementById("inputReader").addEventListener('paste', (event) => { event.preventDefault(); window.alert("Imagine trying to paste code");});
+document.getElementById("inputReader").addEventListener('paste', (event) => { event.preventDefault(); window.alert("no pasting code allowed");});
 
 // Event listener for handling form submissions (entering a command)
 document.getElementById("inputForm").addEventListener("submit", (event) => {
@@ -45,12 +44,8 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         inputField.value = ""; // Clear input field
         if (input === "dir") {
             ownedCmds(currentDirectory);
-        } else if (input === "cd shop") {
-            changeDirectory("shop");
-        } else if (input === "cd main") {
-            changeDirectory("main");
-        } else if (input === "cd credits") {
-            changeDirectory("credits");
+        } else if (input.contains("cd") && input.split("cd ").length === 1) {
+            changeDirectory(input.split("cd "));
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
@@ -63,6 +58,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.log("Debug executed. Current semicolons:", semicolons);
             updateSemicolonsDisplay();
         } else {
+            document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Command</span>" + "<br>";
             console.error("Unknown command:", input);
             return;
         }
@@ -70,11 +66,6 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         // Update command history for valid commands
         if (currentDirectory !== "credits") {
             document.getElementById("cmdHistory").innerHTML += input + "<br>";
-        }
-
-        // Hide "dir" output after executing another command
-        if (input !== "dir") {
-            document.getElementById("ownedCmdsWrap").innerHTML = "";
         }
     }
 });
@@ -123,9 +114,9 @@ function ownedCmds(directory) {
     if (directory === "main") {
         dir = cmds.concat(["cd shop", "cd credits"]);
     } else if (directory === "shop") {
-        //This line is very long. It takes every item in shop commands and adds the semicolon cost in green to the end
-        const dirSetup = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>");
-        dir = dirSetup.concat(["cd main", "cd credits"]); //just adds cd main and cd credits to the command list
+        //This line is very long. It takes every item in shop commands and adds the semicolon cost in green to the end, and adds cd main and cd shop to the command list
+        dir = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>").concat(["cd main", "cd credits"]); //adds cd main and cd credits to the command list
+        //const dirSetup = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>");
     } else if (directory === "credits") {
         dir = ["cd main", "cd shop"];
     } else {
@@ -139,10 +130,17 @@ function ownedCmds(directory) {
 
 // Function to change directories
 function changeDirectory(directory) {
+    if (!directories.includes(directory)) {
+        document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Directory</span>" + "<br>";
+        return;
+    }
     if (currentDirectory === "credits") {
         document.getElementById("cmdHistory").innerHTML = ""; // Clear credits display
     }
 
+    //clears dir after changing directories
+    document.getElementById("ownedCmdsWrap").innerHTML = "";
+    
     currentDirectory = directory;
     if (directory !== "main") {
     document.getElementById("directoryTitle").innerHTML = `main/${directory}/`;
@@ -157,3 +155,12 @@ function changeDirectory(directory) {
         console.log(`You are now in the ${directory} directory. Type 'dir' to see available commands.`);
     }
 }
+/*
+for safekeeping for now 
+else if (input === "cd shop") {
+            changeDirectory("shop");
+        } else if (input === "cd main") {
+            changeDirectory("main");
+        } else if (input === "cd credits") {
+            changeDirectory("credits");
+*/
