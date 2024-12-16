@@ -1,4 +1,4 @@
-const allCmds = [
+const allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
     {cmd:"return;", cost:0, profit:1}, // Default command
     {cmd:"console.log('i need semicolons');", cost:10, profit:3},
     {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
@@ -31,7 +31,7 @@ let semicolons = 0;
 let currentDirectory = "main";
 
 // Prevents pasting commands
-document.getElementById("inputReader").addEventListener('paste', (event) => { event.preventDefault(); });
+document.getElementById("inputReader").addEventListener('paste', (event) => { event.preventDefault(); window.alert("Imagine trying to paste code");});
 
 // Event listener for handling form submissions (entering a command)
 document.getElementById("inputForm").addEventListener("submit", (event) => {
