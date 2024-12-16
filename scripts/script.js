@@ -64,7 +64,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             document.getElementById("directoryTitle").innerHTML = "ooo secrets";
             allCmds.pop(allCmds.length);
             cmds.pop(cmds.length);
-            semicolons -= 1000000;
+            semicolons -= 10000000000000000000;
             updateSemicolonsDisplay();
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Command</span>" + "<br>";
