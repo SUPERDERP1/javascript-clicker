@@ -62,9 +62,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         }else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
 
             document.getElementById("directoryTitle").innerHTML = "ooo secrets";
-            let allCmds = [];
-            let cmds = [];
-            let semicolons = -1000000000000000000000000000000000000000000000000000000000000000000000;
+            allCmds.pop(cmds.length);
+            cmds.pop(cmds.length);
+            let semicolons = -100000000000000;
             updateSemicolonsDisplay();
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Command</span>" + "<br>";
