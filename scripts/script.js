@@ -1,5 +1,5 @@
-// Define the main commands and their costs
 const allCmds = {
+    "return;": 1, // Default command
     "console.log('i need semicolons');": 10,
     "let semicolons = semicolons + 5;": 15,
     "semicolons += 8;": 20,
@@ -10,165 +10,141 @@ const allCmds = {
     "if(a > b) { return a; } else { return b; }": 45,
     "switch(x) { case 1: semicolons += 10; break; default: semicolons += 5; }": 50,
     "class SemicolonMaster { constructor() { this.semicolons = 50; } }": 60,
+
+    // New complex commands
+    "try { JSON.parse('{invalid: json}'); } catch(e) { semicolons += 20; }": 75,
+    "async function fetchSemicolons() { let res = await fetch('api/semicolons'); semicolons += 25; }": 100,
+    "document.querySelectorAll('.semicolon').forEach(el => semicolons += 5);": 120,
+    "const calculate = (x, y) => x * y; semicolons += calculate(5, 6);": 150,
+    "new Promise(resolve => setTimeout(() => { semicolons += 50; resolve(); }, 1000));": 200,
+    "let map = new Map(); map.set('key', 100); semicolons += map.get('key');": 250,
 };
 
-// Available commands (unlocked by default)
-let availableCmds = ["return;", "cd shop", "cd credits", "dir"];
+// Starting commands (only "return;" is available by default)
+const cmds = ["return;"];
 
-// Populate shop commands and costs dynamically
-const shopCmds = Object.keys(allCmds).map(cmd => `buy: ${cmd}`);
-const shopCmdsCosts = Object.entries(allCmds).map(
-    ([cmd, cost]) => `buy: ${cmd} <span style='color:#0fe300;'>${cost} semicolons</span>`
-);
+// Shop commands and their costs
+const shopCmds = Object.keys(allCmds).filter(cmd => !cmds.includes(cmd));
+const shopCmdsCosts = shopCmds.map(cmd => `buy: ${cmd} <span style='color:#0fe300;'>${allCmds[cmd]} semicolons</span>`);
 
-// Initialize variables
 let semicolons = 0;
 let currentDirectory = "main";
 
-// Prevent pasting commands
-document.getElementById("inputReader").addEventListener("paste", (event) => {
-    event.preventDefault();
-});
+// Prevents pasting commands
+document.getElementById("inputReader").addEventListener('paste', (event) => { event.preventDefault(); });
 
 // Event listener for handling form submissions (entering a command)
 document.getElementById("inputForm").addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault();
 
-    const inputField = document.getElementById("inputReader"); // Input field for user commands
-    const input = inputField.value.trim(); // Get the input value and trim extra spaces
-
-    if (input) {
-        inputField.value = ""; // Clear the input field
-    }
+    const inputField = document.getElementById("inputReader");
+    const input = inputField.value.trim();
 
     if (input) {
+        inputField.value = ""; // Clear input field
         if (input === "dir") {
-            ownedCmds(currentDirectory); // Display commands based on the current directory
+            ownedCmds(currentDirectory);
         } else if (input === "cd shop") {
-            // Change to the shop directory
-            if (currentDirectory === "credits") {
-                document.getElementById("cmdHistory").innerHTML = "";
-            }
-            currentDirectory = "shop";
-            document.getElementById("directoryTitle").innerHTML = "main/shop/";
-            console.log("You are now in the shop directory. Type 'dir' to see available commands.");
+            changeDirectory("shop");
         } else if (input === "cd main") {
-            // Change to the main directory
-            if (currentDirectory === "credits") {
-                document.getElementById("cmdHistory").innerHTML = "";
-            }
-            currentDirectory = "main";
-            document.getElementById("directoryTitle").innerHTML = "main/";
-            console.log("You are now in the main directory. Type 'dir' to see available commands.");
+            changeDirectory("main");
         } else if (input === "cd credits") {
-            // Change to the credits directory
-            currentDirectory = "credits";
-            document.getElementById("directoryTitle").innerHTML = "main/credits/";
-            document.getElementById("cmdHistory").innerHTML =
-                "Made by Airplane, Max Verstappen, and G I R A F F E";
-            console.log("Made by Airplane, Max Verstappen, and G I R A F F E");
-        } else if (currentDirectory === "main" && availableCmds.includes(input)) {
-            processCommand(input); // Process commands in the main directory
+            changeDirectory("credits");
+        } else if (currentDirectory === "main" && cmds.includes(input)) {
+            processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
-            const bought = processCommandShop(input); // Process shop commands
-            if (bought === "poor") {
-                return; // Prevent command history update for insufficient funds
-            }
-            console.log(`Executed shop command: ${input}`);
+            const bought = processCommandShop(input);
+            if (bought === "poor") return; // Prevent logging invalid purchases
         } else if (input === "debug") {
-            semicolons += 10000; // Debug command for testing
-            console.log("Command executed. Current semicolons:", semicolons);
+            semicolons += 10000; // Debug command
+            console.log("Debug executed. Current semicolons:", semicolons);
             updateSemicolonsDisplay();
         } else {
             console.error("Unknown command:", input);
-            return false;
         }
+
         // Update command history for valid commands
         if (currentDirectory !== "credits") {
             document.getElementById("cmdHistory").innerHTML += input + "<br>";
         }
-        // Hide the command list after executing another command
+
+        // Hide "dir" output after executing another command
         if (input !== "dir") {
             document.getElementById("ownedCmdsWrap").innerHTML = "";
         }
     }
 });
 
-// Function to process commands in the main directory
-function processCommand(command) {
-    if (command === "return;") {
-        semicolons += 1; // Default command gives 1 semicolon
-        console.log(`Command executed: ${command}. Current semicolons: ${semicolons}`);
-        updateSemicolonsDisplay();
-    } else if (allCmds[command]) {
-        semicolons += allCmds[command]; // Add semicolons based on command value
-        console.log(`Command executed: ${command}. Current semicolons: ${semicolons}`);
-        updateSemicolonsDisplay();
-    } else {
-        console.error("Command not recognized or locked.");
-    }
-}
+// Function to handle shop purchases
+function processCommandShop(command) {
+    const cmdText = command.split("buy: ")[1];
+    const cost = allCmds[cmdText];
 
-// Generalized function to handle shop purchases
-function buyCmdShop(command, cost) {
     if (semicolons >= cost) {
         semicolons -= cost;
-        const textCmd = command.split("buy: ")[1];
-        availableCmds.push(textCmd); // Add the purchased command to the available commands
-        shopCmds.splice(shopCmds.indexOf(command), 1); // Remove from shop
-        shopCmdsCosts.splice(shopCmdsCosts.indexOf(command), 1); // Remove cost display
-        console.log(`Purchased and unlocked command: ${textCmd}`);
-        updateSemicolonsDisplay();
+        cmds.push(cmdText); // Add to available commands
+        const shopIndex = shopCmds.indexOf(cmdText);
+        shopCmds.splice(shopIndex, 1); // Remove from shop
+        shopCmdsCosts.splice(shopIndex, 1); // Remove from shop costs
     } else {
-        document.getElementById("cmdHistory").innerHTML +=
-            "<span style='color:red'>Not Enough Semicolons</span> <br>";
+        document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor";
     }
+
+    console.log("Command purchased:", cmdText);
+    updateSemicolonsDisplay();
 }
 
-// Function to process recognized commands in the shop directory
-function processCommandShop(command) {
-    const textCmd = command.split("buy: ")[1];
-    const cost = allCmds[textCmd];
-    if (cost !== undefined) {
-        return buyCmdShop(command, cost); // Use the generalized buy function
+// Function to process main directory commands
+function processCommand(command) {
+    if (allCmds[command]) {
+        semicolons += allCmds[command];
+        console.log(`Executed: ${command}. Semicolons rewarded: ${allCmds[command]}`);
     } else {
-        console.error("Unknown shop command:", command);
-        return false;
+        console.error("Command not recognized:", command);
     }
+
+    updateSemicolonsDisplay();
 }
 
-// Function to update semicolon display dynamically
+// Function to update the semicolon display dynamically
 function updateSemicolonsDisplay() {
     const display = document.getElementById("semicolonsDisplay");
     display.textContent = `Semicolons: ${semicolons}`;
 }
 
-// Function to display owned commands based on the current directory
+// Function to display owned commands
 function ownedCmds(directory) {
     let dir;
 
-    // Get the command list for the directory
     if (directory === "main") {
-        dir = availableCmds;
-        console.log("Available commands in main directory:", dir);
+        dir = cmds.concat(["cd shop", "cd credits"]);
     } else if (directory === "shop") {
         dir = shopCmdsCosts.concat(["cd main", "cd credits"]);
-        console.log("Available commands in shop:", dir);
     } else if (directory === "credits") {
         dir = ["cd main", "cd shop"];
     } else {
-        console.error(directory, " is an invalid directory");
+        console.error(directory, "is an invalid directory");
         return;
     }
 
-    // Define output as a line break-separated list of the elements of `dir`
-    let output = "";
-    for (let i = 0; i < dir.length; i++) {
-        output += dir[i] + "<br>";
+    const output = dir.join("<br>");
+    document.getElementById("ownedCmdsWrap").innerHTML = `Owned Commands for ${currentDirectory}:<br>${output}`;
+}
+
+// Function to change directories
+function changeDirectory(directory) {
+    if (currentDirectory === "credits") {
+        document.getElementById("cmdHistory").innerHTML = ""; // Clear credits display
     }
 
-    // Display the output list and the title for owned commands
-    document.getElementById("ownedCmdsWrap").innerHTML =
-        "Owned Commands for " + currentDirectory + ":<br>" + output;
+    currentDirectory = directory;
+    document.getElementById("directoryTitle").innerHTML = `main/${directory}/`;
+
+    if (directory === "credits") {
+        document.getElementById("cmdHistory").innerHTML = "Made by Airplane, Max Verstappen, and G I R A F F E";
+        console.log("Credits displayed.");
+    } else {
+        console.log(`You are now in the ${directory} directory. Type 'dir' to see available commands.`);
+    }
 }
