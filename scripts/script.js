@@ -52,7 +52,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             changeDirectory("credits");
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             processCommand(input);
-        } else if (const cmd = input.split("buy: ")[1]; currentDirectory === "shop" && shopCmds.cmd !== undefined) {
+        } else if (currentDirectory === "shop" && shopCmds.input.split("buy: ")[1] !== undefined) {
             const bought = processCommandShop(input);
             if (bought === "poor") return; // Prevent logging invalid purchases
         } else if (input === "debug") {
