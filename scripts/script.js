@@ -74,8 +74,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 
         // Update command history for valid commands
         if (currentDirectory !== "credits") {
-            document.getElementById("cmdHistory").textContent += input;
-            document.getElementById("cmdHistory").innerHTML += "<br>";
+            document.getElementById("cmdHistory").innerHTML += input + "<br>";
         }
     }
 });
