@@ -61,6 +61,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             updateSemicolonsDisplay();
         } else {
             console.error("Unknown command:", input);
+            return;
         }
 
         // Update command history for valid commands
