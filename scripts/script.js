@@ -24,7 +24,6 @@ const allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST T
 // Starting commands (only "return;" is available by default)
 const cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
-//const shopCmdsSetup = allCmds.filter(item => !cmds.includes(item.cmd)); //excludes the return; from shop list
 const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 
 let semicolons = 0;
@@ -46,6 +45,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             ownedCmds(currentDirectory);
         } else if (input.includes("cd") && input.split("cd ").length === 2) {
             changeDirectory(input.split("cd ")[1]);
+            if (!directories.includes(input.split("cd ")[1])) {
+                return;
+            }
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
@@ -86,6 +88,7 @@ function processCommandShop(command) {
     }
 
     console.log("Command purchased:", cmdText);
+    ownedCmds(currentDirectory);
     updateSemicolonsDisplay();
 }
 
@@ -116,7 +119,6 @@ function ownedCmds(directory) {
     } else if (directory === "shop") {
         //This line is very long. It takes every item in shop commands and adds the semicolon cost in green to the end, and adds cd main and cd shop to the command list
         dir = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>").concat(["cd main", "cd credits"]); //adds cd main and cd credits to the command list
-        //const dirSetup = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>");
     } else if (directory === "credits") {
         dir = ["cd main", "cd shop"];
     } else {
@@ -155,12 +157,3 @@ function changeDirectory(directory) {
         console.log(`You are now in the ${directory} directory. Type 'dir' to see available commands.`);
     }
 }
-/*
-for safekeeping for now 
-else if (input === "cd shop") {
-            changeDirectory("shop");
-        } else if (input === "cd main") {
-            changeDirectory("main");
-        } else if (input === "cd credits") {
-            changeDirectory("credits");
-*/
