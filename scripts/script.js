@@ -140,7 +140,11 @@ function changeDirectory(directory) {
     }
 
     currentDirectory = directory;
-    document.getElementById("directoryTitle").innerHTML = `${directory}/`;
+    if (directory !== "main") {
+    document.getElementById("directoryTitle").innerHTML = `main/${directory}/`;
+    } else {
+        document.getElementById("directoryTitle").innerHTML = `main/`;
+    }
 
     if (directory === "credits") {
         document.getElementById("cmdHistory").innerHTML = "Made by Airplane, Max Verstappen, and G I R A F F E";
