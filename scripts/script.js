@@ -44,8 +44,8 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         inputField.value = ""; // Clear input field
         if (input === "dir") {
             ownedCmds(currentDirectory);
-        } else if (input.contains("cd") && input.split("cd ").length === 1) {
-            changeDirectory(input.split("cd "));
+        } else if (input.includes("cd") && input.split("cd ").length === 2) {
+            changeDirectory(input.split("cd ")[1]);
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
@@ -130,7 +130,7 @@ function ownedCmds(directory) {
 
 // Function to change directories
 function changeDirectory(directory) {
-    if (!directories.includes(directory)) {
+    if (!directories.includes(directory) || !directory) {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Directory</span>" + "<br>";
         return;
     }
