@@ -20,7 +20,19 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"new Promise(resolve => setTimeout(() => { semicolons += 50; resolve(); }, 1000));", cost:200, profit:180},
     {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},
 ];
-
+let cssCmds = [ //cmds for css mode WIP
+    {cmd:"@import(https://example.com)", cost:0, profit:1}, // Default command
+    {cmd:"color:#000;", cost:10, profit:3},
+    {cmd:"", cost:15, profit:5},
+    {cmd:"", cost:20, profit:8},
+    {cmd:":root {--semicolons: 1000;}", cost:25, profit:10},
+    {cmd:".semicolons:target { overflow-x:var(--semicolons);}", cost:30, profit:12},
+    {cmd:"#semicolons::before { content: '1000';}", cost:35, profit:15},
+    {cmd:"", cost:40, profit:20},
+    {cmd:"", cost:45, profit: 25},
+    {cmd:"@media only screen and (max-width:1000px)", cost:50, profit:30},
+    {cmd:"", cost:60, profit:40}
+];
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
