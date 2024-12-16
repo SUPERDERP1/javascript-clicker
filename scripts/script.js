@@ -59,6 +59,12 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             semicolons += 10000; // Debug command
             console.log("Debug executed. Current semicolons:", semicolons);
             updateSemicolonsDisplay();
+        }else if (input === "secretsaremeanttobehidden"){
+
+            document.getElementById("directoryTitle").innerHTML = "ooo secrets"
+            const allCmds = [];
+            let semicolons = -1000000000000000000000000000000000000000000000000000000000000000000000;
+
         } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Command</span>" + "<br>";
             console.error("Unknown command:", input);
