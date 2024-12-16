@@ -82,7 +82,7 @@ function processCommandShop(command) {
     const cost = allCmds[cmdText];
 
     if (semicolons >= cost) {
-        semicolons -= cost;
+        semicolons - cost;
         cmds.push(cmdText); // Add to available commands
         const shopIndex = shopCmds.indexOf(cmdText);
         shopCmds.splice(shopIndex, 1); // Remove from shop
