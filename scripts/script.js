@@ -59,7 +59,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             semicolons += 10000; // Debug command
             console.log("Debug executed. Current semicolons:", semicolons);
             updateSemicolonsDisplay();
-        }else if (input === "secretsaremeanttobehidden"){
+        }else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
 
             document.getElementById("directoryTitle").innerHTML = "ooo secrets"
             const allCmds = [];
