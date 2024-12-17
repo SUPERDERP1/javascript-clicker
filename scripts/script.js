@@ -21,7 +21,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},
 
     //CSS Mode unlocker
-    {cmd:"CSS MODE", cost:1000, profit:0}
+    {cmd:"CSS MODE", cost:1000, mode:"css"}
 ];
 let cssCmds = [ //cmds for css mode WIP
     {cmd:"color:#000;", cost:0, profit:1}, // Default command
@@ -36,7 +36,7 @@ let cssCmds = [ //cmds for css mode WIP
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
-const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd) || item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd) || !).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 const needToBuy = shopCmds.length;
 
 let semicolons = 0;
