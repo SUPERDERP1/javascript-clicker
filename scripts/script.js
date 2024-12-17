@@ -83,10 +83,11 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
                 shopCmds:<br>${shopCmdsStr}<br>`;
             updateSemicolonsDisplay();
         } else if (input === "CSS MODE" && cmds.includes("CSS MODE")) {
-            document.getElementById("cmdHistory").innerHTML += "<span style='color:green'>CSS MODE ON</span> <br> Check shop and main for new commands";
+            console.log("CSS mode on");
+            document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>CSS MODE ON</span> <br> Check shop and main for new commands";
             cmds = ["color:#000;"];
             allCmds = cssCmds;
-            shopCmds = allCmds.filter(item => !cmds.includes(item.cmd) || item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+            shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
             semicolons = 0;
         } else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
 
@@ -125,8 +126,10 @@ function processCommandShop(command) {
     }
 
     if (shopCmds.length <= 0) {
-        document.getElementById("cmdHistory").innerHTML += "<span style='color:green'>You Can Now Buy CSS MODE</span> <br>";
+        document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>You Can Now Buy CSS MODE</span> <br>";
         shopCmds.push("buy: CSS MODE");
+        document.getElementById("cmdHistory").innerHTML += command + "<br>";
+        return "poor";
     }
     console.log("Command purchased:", cmdText);
     if (!(document.getElementById("ownedCmdsWrap").innerHTML == "")) {
