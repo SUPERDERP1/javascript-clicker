@@ -118,9 +118,8 @@ function processCommandShop(command) {
     if (semicolons >= cost) {
         semicolons -= cost;
         cmds.push(cmdText); // Add to available commands
-        const shopIndex = shopCmds.indexOf(command);
         shopCmds.splice(shopIndex, 1); // Remove from shop
-        needToBuy -= 1;
+        //needToBuy -= 1;
     } else {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor";
