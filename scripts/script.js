@@ -4,7 +4,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"console.log('i need semicolons');", cost:10, profit:3},
     {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
     {cmd:"semicolons += 8;", cost:20, profit:8},
-    {cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
+    /*{cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
     {cmd:"if(money < 100000) {giveMoney();}", cost:30, profit:12},
     {cmd:"for(let i = 0; i < 10; i++) { semicolons += i; }", cost:35, profit:15},
     {cmd:"while(semicolons < 100) { semicolons += 5; }", cost:40, profit:20},
@@ -18,7 +18,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"document.querySelectorAll('.semicolon').forEach(el => semicolons += 5);", cost:120, profit:110},
     {cmd:"const calculate = (x, y) => x * y; semicolons += calculate(5, 6);", cost:150, profit:130},
     {cmd:"new Promise(resolve => setTimeout(() => { semicolons += 50; resolve(); }, 1000));", cost:200, profit:180},
-    {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},
+    {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},*/
 
     //CSS Mode unlocker
     {cmd:"CSS MODE", cost:1000, mode:"css"}
