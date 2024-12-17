@@ -76,7 +76,6 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             
             document.getElementById("cmdHistory").innerHTML += 
                 `DEBUG:<br>
-                needToBuy: ${needToBuy}<br>
                 semicolons:${semicolons}<br>
                 currentDirectory:${currentDirectory}<br>
                 allCmds:<br>${allCmdsStr}<br>
