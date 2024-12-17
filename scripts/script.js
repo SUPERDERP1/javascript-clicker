@@ -31,13 +31,12 @@ let cssCmds = [ //cmds for css mode WIP
     {cmd:"@media only screen and (max-width:1000px)", cost:30, profit:12},
     {cmd:"#semicolons::before { content: '1000';}", cost:35, profit:15},
     {cmd:".semicolons:target { overflow-x:var(--semicolons);}", cost:40, profit:20},
-    {cmd:".semicolonsContainer .semicolons a:link {background-filter: blur(calc(100vw - 30px));", cost:45, profit: 25}
+    {cmd:".semicolonsContainer .semicolons a:link {backdrop-filter: blur(calc(100vw - 30px));", cost:45, profit: 25}
 ];
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
 const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
-const needToBuy = shopCmds.length;
 
 let semicolons = 0;
 let currentDirectory = "main";
@@ -126,12 +125,12 @@ function processCommandShop(command) {
         return "poor";
     }
 
-    if (needToBuy <= 0) {
+    if (shopCmds.length <= 0) {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:green'>You Can Now Buy CSS MODE</span> <br>";
         shopCmds.push("buy: CSS MODE");
     }
     console.log("Command purchased:", cmdText);
-    if !(document.getElementById("ownedCmdsWrap").innerHTML == "") {
+    if (!(document.getElementById("ownedCmdsWrap").innerHTML == "")) {
         ownedCmds(currentDirectory);
     }
     updateSemicolonsDisplay();
