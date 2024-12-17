@@ -99,7 +99,9 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             semicolons -= 10000000000000000000;
             updateSemicolonsDisplay();
         }else if (input === "prestige") {
-           prestige();
+           semicolons = 0;
+           prestigeCount += 1;
+           console.log("prestiged")
         }else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Command</span>" + "<br>";
             console.error("Unknown command:", input);
