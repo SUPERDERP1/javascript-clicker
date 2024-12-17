@@ -114,7 +114,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 function processCommandShop(command) {
     const cmdText = command.split("buy: ")[1]; //finds the original command code which can interface with allCmds
     const cost = allCmds.find(item => "buy: " + item.cmd === command).cost; //finds the object in all Cmds that corresponds to the command and extracts the cost
-
+    console.log(cost);
     if (semicolons >= cost) {
         semicolons -= cost;
         cmds.push(cmdText); // Add to available commands
