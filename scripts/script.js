@@ -210,5 +210,5 @@ function changeDirectory(directory) {
 let prestigeCount = 1;
 function prestige() {
 semicolons = 0;
-prestigeCount++;
+prestigeCount += 1;
 }
