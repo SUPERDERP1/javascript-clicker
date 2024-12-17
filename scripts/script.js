@@ -2,9 +2,9 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command
     {cmd:"console.log('i need semicolons');", cost:10, profit:3},
-    {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
+    /*{cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
     {cmd:"semicolons += 8;", cost:20, profit:8},
-    /*{cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
+    {cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
     {cmd:"if(money < 100000) {giveMoney();}", cost:30, profit:12},
     {cmd:"for(let i = 0; i < 10; i++) { semicolons += i; }", cost:35, profit:15},
     {cmd:"while(semicolons < 100) { semicolons += 5; }", cost:40, profit:20},
@@ -21,7 +21,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},*/
 
     //CSS Mode unlocker
-    {cmd:"CSS MODE", cost:1000, mode:"css"}
+    {cmd:"CSS MODE", cost:1000, profit:0}
 ];
 let cssCmds = [ //cmds for css mode WIP
     {cmd:"color:#000;", cost:0, profit:1}, // Default command
@@ -126,9 +126,9 @@ function processCommandShop(command) {
     }
 
     if (shopCmds.length <= 0) {
+        document.getElementById("cmdHistory").innerHTML += command + "<br>";
         document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>You Can Now Buy CSS MODE</span> <br>";
         shopCmds.push("buy: CSS MODE");
-        document.getElementById("cmdHistory").innerHTML += command + "<br>";
         return "poor";
     }
     console.log("Command purchased:", cmdText);
