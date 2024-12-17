@@ -2,7 +2,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command
     {cmd:"console.log('i need semicolons');", cost:10, profit:3},
-    /*{cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
+    {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
     {cmd:"semicolons += 8;", cost:20, profit:8},
     {cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
     {cmd:"if(money < 100000) {giveMoney();}", cost:30, profit:12},
@@ -18,7 +18,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"document.querySelectorAll('.semicolon').forEach(el => semicolons += 5);", cost:120, profit:110},
     {cmd:"const calculate = (x, y) => x * y; semicolons += calculate(5, 6);", cost:150, profit:130},
     {cmd:"new Promise(resolve => setTimeout(() => { semicolons += 50; resolve(); }, 1000));", cost:200, profit:180},
-    {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},*/
+    {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},
 
     //CSS Mode unlocker
     {cmd:"CSS MODE", cost:1000, profit:0}
@@ -42,7 +42,7 @@ let semicolons = 0;
 let currentDirectory = "main";
 
 // Prevents pasting commands (disabled for testing)
-//document.getElementById("inputReader").addEventListener('paste', (event) => { event.preventDefault(); window.alert("no pasting code allowed");});
+document.getElementById("inputReader").addEventListener('paste', (event) => { event.preventDefault(); window.alert("no pasting code allowed");});
 
 // Event listener for handling form submissions (entering a command)
 document.getElementById("inputForm").addEventListener("submit", (event) => {
@@ -89,6 +89,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             allCmds = cssCmds;
             shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
             semicolons = 0;
+            updateSemicolonsDisplay();
         } else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
 
             document.getElementById("directoryTitle").innerHTML = "ooo secrets";
