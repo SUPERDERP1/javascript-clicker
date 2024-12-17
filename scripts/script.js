@@ -36,7 +36,7 @@ let cssCmds = [ //cmds for css mode WIP
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
-const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd) || !).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd) || !(item.cmd === "CSS MODE")).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 const needToBuy = shopCmds.length;
 
 let semicolons = 0;
