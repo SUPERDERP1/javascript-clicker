@@ -1,7 +1,7 @@
 let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command 
-    {cmd:"console.log('i need semicolons');", cost:(10), profit:3},
+    {cmd:"console.log('i need semicolons');", cost:(10*(1.5*prestigeCount)), profit:3},
     {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
     {cmd:"semicolons += 8;", cost:20, profit:8},
     {cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
