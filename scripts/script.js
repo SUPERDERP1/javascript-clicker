@@ -71,7 +71,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else if (input === "debug") {
             semicolons += 10000; // Debug command
             console.log("Debug executed. Current semicolons:", semicolons);
-            const allCmdsStr = allCmds.join('<br>');
+            const allCmdsStr = allCmds.map(cmd => JSON.stringify(cmd)).join('<br>');
             const cmdsStr = cmds.join('<br>');
             const shopCmdsStr = shopCmds.join('<br>');
             
@@ -128,7 +128,7 @@ function processCommandShop(command) {
 
     if (needToBuy <= 0) {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:green'>You Can Now Buy CSS MODE</span> <br>";
-        shopCmds.push(allCmds.find(item => item.cmd == "CSS MODE").map((item) => "buy: " + item.cmd);
+        shopCmds.push("buy: CSS MODE");
     }
     console.log("Command purchased:", cmdText);
     ownedCmds(currentDirectory);
