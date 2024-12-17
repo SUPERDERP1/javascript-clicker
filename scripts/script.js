@@ -66,7 +66,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             const bought = processCommandShop(input);
             if (bought === "poor") {
-                return; // Prevent logging invalid purchases
+                //return; // Prevent logging invalid purchases
             }
         } else if (input === "debug") {
             semicolons += 10000; // Debug command
