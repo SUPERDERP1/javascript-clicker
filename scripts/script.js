@@ -66,7 +66,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             const bought = processCommandShop(input);
             if (bought === "poor") {
-                //return; // Prevent logging invalid purchases
+                return; // Prevent logging invalid purchases
             }
         } else if (input === "debug") {
             semicolons += 10000; // Debug command
@@ -120,7 +120,7 @@ function processCommandShop(command) {
         cmds.push(cmdText); // Add to available commands
         const shopIndex = shopCmds.indexOf(command);
         shopCmds.splice(shopIndex, 1); // Remove from shop
-        needToBuy--;
+        needToBuy -= 1;
     } else {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor";
