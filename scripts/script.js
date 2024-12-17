@@ -127,7 +127,6 @@ function processCommandShop(command) {
         cmds.push(cmdText); // Add to available commands
         shopCmds.splice(shopIndex, 1); // Remove from shop
         console.log("pos3");
-        needToBuy -= 1;
         console.log("pos4");
     } else {
         console.log("pos4.5");
