@@ -60,7 +60,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             if (!directories.includes(input.split("cd ")[1])) {
                 return;
             }
-        } else if (currentDirectory === "main" && cmds.includes(input)) {
+        } else if (currentDirectory === "main" && cmds.includes(input) && input !== "CSS MODE") {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             const bought = processCommandShop(input);
@@ -125,7 +125,7 @@ function processCommandShop(command) {
         return "poor";
     }
 
-    if (shopCmds.length <= 0) {
+    if (shopCmds.length == 0) {
         document.getElementById("cmdHistory").innerHTML += command + "<br>";
         document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>You Can Now Buy CSS MODE</span> <br>";
         shopCmds.push("buy: CSS MODE");
