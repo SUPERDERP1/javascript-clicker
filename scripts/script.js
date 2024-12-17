@@ -19,24 +19,25 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"const calculate = (x, y) => x * y; semicolons += calculate(5, 6);", cost:150, profit:130},
     {cmd:"new Promise(resolve => setTimeout(() => { semicolons += 50; resolve(); }, 1000));", cost:200, profit:180},
     {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},
+
+    //CSS Mode unlocker
+    {cmd:"CSS MODE", cost:1000, profit:0}
 ];
 let cssCmds = [ //cmds for css mode WIP
-    {cmd:"@import(https://example.com)", cost:0, profit:1}, // Default command
-    {cmd:"color:#000;", cost:10, profit:3},
-    {cmd:"", cost:15, profit:5},
-    {cmd:"", cost:20, profit:8},
+    {cmd:"color:#000;", cost:0, profit:1}, // Default command
+    {cmd:"!important", cost:15, profit:3},
+    {cmd:"@import url('https://example.com');", cost:15, profit:5},
     {cmd:":root {--semicolons: 1000;}", cost:25, profit:10},
-    {cmd:".semicolons:target { overflow-x:var(--semicolons);}", cost:30, profit:12},
+    {cmd:"@media only screen and (max-width:1000px)", cost:30, profit:12},
     {cmd:"#semicolons::before { content: '1000';}", cost:35, profit:15},
-    {cmd:"", cost:40, profit:20},
-    {cmd:"", cost:45, profit: 25},
-    {cmd:"@media only screen and (max-width:1000px)", cost:50, profit:30},
-    {cmd:"", cost:60, profit:40}
+    {cmd:".semicolons:target { overflow-x:var(--semicolons);}", cost:40, profit:20},
+    {cmd:".semicolonsContainer .semicolons a:link {background-filter: blur(calc(100vw - 30px));", cost:45, profit: 25}
 ];
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
-const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd) || item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+const needToBuy = shopCmds.length;
 
 let semicolons = 0;
 let currentDirectory = "main";
@@ -70,8 +71,26 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else if (input === "debug") {
             semicolons += 10000; // Debug command
             console.log("Debug executed. Current semicolons:", semicolons);
+            const allCmdsStr = allCmds.join('<br>');
+            const cmdsStr = cmds.join('<br>');
+            const shopCmdsStr = shopCmds.join('<br>');
+            
+            document.getElementById("cmdHistory").innerHTML += 
+                `DEBUG:<br>
+                needToBuy: ${needToBuy}<br>
+                semicolons:${semicolons}<br>
+                currentDirectory:${currentDirectory}<br>
+                allCmds:<br>${allCmdsStr}<br>
+                cmds:<br>${cmdsStr}<br>
+                shopCmds:<br>${shopCmdsStr}<br>`;
             updateSemicolonsDisplay();
-        }else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
+        } else if (input === "CSS MODE" && cmds.includes("CSS MODE")) {
+            document.getElementById("cmdHistory").innerHTML += "<span style='color:green'>CSS MODE ON</span> <br> Check shop and main for new commands";
+            cmds = ["color:#000;"];
+            allCmds = cssCmds;
+            shopCmds = allCmds.filter(item => !cmds.includes(item.cmd) || item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+            semicolons = 0;
+        } else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
 
             document.getElementById("directoryTitle").innerHTML = "ooo secrets";
             allCmds.pop(allCmds.length);
@@ -101,11 +120,16 @@ function processCommandShop(command) {
         cmds.push(cmdText); // Add to available commands
         const shopIndex = shopCmds.indexOf(command);
         shopCmds.splice(shopIndex, 1); // Remove from shop
+        needToBuy--;
     } else {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor";
     }
 
+    if (needToBuy <= 0) {
+        document.getElementById("cmdHistory").innerHTML += "<span style='color:green'>You Can Now Buy CSS MODE</span> <br>";
+        shopCmds.push(allCmds.find(item => item.cmd == "CSS MODE").map((item) => "buy: " + item.cmd);
+    }
     console.log("Command purchased:", cmdText);
     ownedCmds(currentDirectory);
     updateSemicolonsDisplay();
