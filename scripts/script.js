@@ -37,7 +37,7 @@ let cssCmds = [ //cmds for css mode WIP
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
 const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
-
+let prestigeCount = 1;
 let semicolons = 0;
 let currentDirectory = "main";
 
@@ -208,9 +208,4 @@ function changeDirectory(directory) {
     } else {
         console.log(`You are now in the ${directory} directory. Type 'dir' to see available commands.`);
     }
-}
-let prestigeCount = 1;
-function prestige() {
-semicolons = 0;
-prestigeCount += 1;
 }
