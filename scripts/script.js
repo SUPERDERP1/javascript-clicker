@@ -64,8 +64,10 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else if (currentDirectory === "main" && cmds.includes(input)) {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
+            console.log("pos0");
             const bought = processCommandShop(input);
             if (bought === "poor") {
+                console.log("pos7");
                 return; // Prevent logging invalid purchases
             }
         } else if (input === "debug") {
@@ -102,7 +104,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.error("Unknown command:", input);
             return;
         }
-
+        console.log("pos8");
         // Update command history for valid commands
         if (currentDirectory !== "credits") {
             document.getElementById("cmdHistory").innerHTML += input + "<br>";
@@ -115,20 +117,27 @@ function processCommandShop(command) {
     const cmdText = command.split("buy: ")[1]; //finds the original command code which can interface with allCmds
     const cost = allCmds.find(item => "buy: " + item.cmd === command).cost; //finds the object in all Cmds that corresponds to the command and extracts the cost
     console.log(cost);
+    console.log("pos1");
     if (semicolons >= cost) {
         semicolons -= cost;
+        console.log("pos2");
         cmds.push(cmdText); // Add to available commands
         shopCmds.splice(shopIndex, 1); // Remove from shop
-        //needToBuy -= 1;
+        console.log("pos3");
+        needToBuy -= 1;
+        console.log("pos4");
     } else {
+        console.log("pos4.5");
         document.getElementById("cmdHistory").innerHTML += "<span style='color:red'>Not Enough Semicolons</span> <br>";
         return "poor";
     }
-
+    console.log("pos5");
     if (needToBuy <= 0) {
+        console.log("pos5.5");
         document.getElementById("cmdHistory").innerHTML += "<span style='color:green'>You Can Now Buy CSS MODE</span> <br>";
         shopCmds.push("buy: CSS MODE");
     }
+    console.log("pos6");
     console.log("Command purchased:", cmdText);
     ownedCmds(currentDirectory);
     updateSemicolonsDisplay();
