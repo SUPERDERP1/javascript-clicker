@@ -116,8 +116,11 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 function processCommandShop(command) {
     const cmdText = command.split("buy: ")[1]; //finds the original command code which can interface with allCmds
     const cost = allCmds.find(item => "buy: " + item.cmd === command).cost; //finds the object in all Cmds that corresponds to the command and extracts the cost
+    const shopIndex = shopCmds.indexOf(command);
     console.log(cost);
     console.log("pos1");
+    console.log(cmdText);
+    console.log("shop index: ", shopIndex);
     if (semicolons >= cost) {
         semicolons -= cost;
         console.log("pos2");
