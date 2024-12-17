@@ -101,7 +101,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         }else if (input === "prestige") {
            semicolons = 0;
            prestigeCount += 1;
-           console.log("prestiged")
+           console.log("prestiged");
         }else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Command</span>" + "<br>";
             console.error("Unknown command:", input);
