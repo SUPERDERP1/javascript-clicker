@@ -35,10 +35,12 @@ let cssCmds = [ //cmds for css mode WIP
     {cmd:".semicolons:target { overflow-x:var(--semicolons);}", cost:40, profit:20},
     {cmd:".semicolonsContainer .semicolons a:link {backdrop-filter: blur(calc(100vw - 30px));", cost:45, profit: 25}
 ];
+let newCmds = [{cmd:"CSS MODE", cost:1000, profit:0},
+    {cmd:"prestige", cost:700, profit:0}];
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
-const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => !newCmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 let prestigeCount = 0;
 let semicolons = 0;
 let currentDirectory = "main";
