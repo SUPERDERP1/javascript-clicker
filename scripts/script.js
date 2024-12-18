@@ -39,7 +39,7 @@ let newCmds = ["CSS MODE", "prestige"];
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
-const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => !newCmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+let shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => !newCmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 let prestigeCount = 0;
 let semicolons = 0;
 let currentDirectory = "main";
