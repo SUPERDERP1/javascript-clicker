@@ -84,6 +84,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
                 cmds:<br>${cmdsStr}<br>
                 shopCmds:<br>${shopCmdsStr}<br>`;
             updateSemicolonsDisplay();
+            $("#inputReader").unbind('paste').paste();
         } else if (input === "CSS MODE" && cmds.includes("CSS MODE")) {
             console.log("CSS mode on");
             document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>CSS MODE ON</span> <br> Check shop and main for new commands";
