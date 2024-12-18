@@ -65,7 +65,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             if (!directories.includes(input.split("cd ")[1])) {
                 return;
             }
-        } else if (currentDirectory === "main" && cmds.includes(input) && input !== "CSS MODE") {
+        } else if (currentDirectory === "main" && cmds.includes(input) && !newCmds.includes(input)) {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             const bought = processCommandShop(input);
@@ -91,7 +91,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.log("CSS mode on");
             document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>CSS MODE ON</span> <br> Check shop and main for new commands";
             cmds.push("color:#000;");
-            allCmds.concat(cssCmds);
+            allCmds = allCmds.concat(cssCmds);
             shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
             updateSemicolonsDisplay();
         } else if (input === "prestige" && cmds.includes("prestige") && window.confirm("Are you sure you want to prestige?\nThis will reset current semicolons.")) { 
