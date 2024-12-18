@@ -35,8 +35,7 @@ let cssCmds = [ //cmds for css mode WIP
     {cmd:".semicolons:target { overflow-x:var(--semicolons);}", cost:40, profit:20},
     {cmd:".semicolonsContainer .semicolons a:link {backdrop-filter: blur(calc(100vw - 30px));", cost:45, profit: 25}
 ];
-let newCmds = [{cmd:"CSS MODE", cost:1000, profit:0},
-    {cmd:"prestige", cost:700, profit:0}];
+let newCmds = ["CSS MODE", "prestige"];
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
