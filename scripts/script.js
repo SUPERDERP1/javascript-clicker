@@ -1,4 +1,3 @@
-let prestigeCount = 0;
 let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command 
@@ -88,7 +87,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.log("CSS mode on");
             document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>CSS MODE ON</span> <br> Check shop and main for new commands";
             cmds.push("color:#000;");
-            allCmds.push(cssCmds);
+            allCmds.push(...cssCmds);
             shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
             updateSemicolonsDisplay();
         } else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
