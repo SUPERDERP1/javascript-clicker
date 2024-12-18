@@ -2,7 +2,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command 
     {cmd:"console.log('i need semicolons');", cost:10, profit:3},
-    {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},*/
+    {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
     {cmd:"semicolons += 8;", cost:20, profit:8},
     {cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
     {cmd:"if(money < 100000) {giveMoney();}", cost:30, profit:12},
