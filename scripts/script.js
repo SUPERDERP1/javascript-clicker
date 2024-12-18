@@ -2,17 +2,17 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command 
     //attempting (and failing) a prestige system
-    {cmd:"console.log('i need semicolons');", cost:10, profit:3},
-    {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
+    /*{cmd:"console.log('i need semicolons');", cost:10, profit:3},
+    {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},*/
     {cmd:"semicolons += 8;", cost:20, profit:8},
-    {cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
+    /*{cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
     {cmd:"if(money < 100000) {giveMoney();}", cost:30, profit:12},
     {cmd:"for(let i = 0; i < 10; i++) { semicolons += i; }", cost:35, profit:15},
     {cmd:"while(semicolons < 100) { semicolons += 5; }", cost:40, profit:20},
     {cmd:"if(a > b) { return a; } else { return b; }", cost:45, profit: 25},
     {cmd:"switch(x) { case 1: semicolons += 10; break; default: semicolons += 5; }", cost:50, profit:30},
     {cmd:"class SemicolonMaster { constructor() { this.semicolons = 50; } }", cost:60, profit:40},
-
+    */
     // New complex commands
     {cmd:"try { JSON.parse('{invalid: json}'); } catch(e) { semicolons += 20; }", cost:75, profit:70},
     {cmd:"async function fetchSemicolons() { let res = await fetch('api/semicolons'); semicolons += 25; }", cost:100, profit:90},
@@ -20,9 +20,10 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"const calculate = (x, y) => x * y; semicolons += calculate(5, 6);", cost:150, profit:130},
     {cmd:"new Promise(resolve => setTimeout(() => { semicolons += 50; resolve(); }, 1000));", cost:200, profit:180},
     {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},
-
-    //CSS Mode unlocker
-    {cmd:"CSS MODE", cost:1000, profit:0}
+    
+    //Other
+    {cmd:"CSS MODE", cost:1000, profit:0},
+    {cmd:"prestige", cost:700, profit:0}
 ];
 let cssCmds = [ //cmds for css mode WIP
     {cmd:"color:#000;", cost:0, profit:1}, // Default command
@@ -38,7 +39,7 @@ let cssCmds = [ //cmds for css mode WIP
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
 const shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
-let prestigeCount = 1;
+let prestigeCount = 0;
 let semicolons = 0;
 let currentDirectory = "main";
 
@@ -87,19 +88,22 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             console.log("CSS mode on");
             document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>CSS MODE ON</span> <br> Check shop and main for new commands";
             cmds.push("color:#000;");
-            allCmds.push(...cssCmds);
+            allCmds.concat(cssCmds);
             shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
             updateSemicolonsDisplay();
+        } else if (input === "prestige" && cmds.includes("prestige") && window.confirm("Are you sure you want to prestige?\nThis will reset current semicolons.")) { 
+            semicolons = 0;
+            prestigeCount += 1;
+            cmds = ["return;"];
+            shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+            console.log("prestiged");
+            document.getElementById("cmdHistory").innerHTML += `<span style='color:#ff0;'>You Have Successfully Prestiged, Current Modifier: ${prestigeCount + 1} </span> <br>`;
         } else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
             document.getElementById("directoryTitle").innerHTML = "ooo secrets";
             allCmds.pop(allCmds.length);
             cmds.pop(cmds.length);
             semicolons -= 100000;
             updateSemicolonsDisplay();
-        } else if (input === "prestige") {
-           semicolons = 0;
-           prestigeCount += 1;
-           console.log("prestiged");
         } else if (input === "debug CSS") {
             shopCmds.push("buy: CSS MODE");
         } else {
@@ -133,8 +137,9 @@ function processCommandShop(command) {
 
     if (shopCmds.length == 0) {
         document.getElementById("cmdHistory").innerHTML += command + "<br>";
-        document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>You Can Now Buy CSS MODE</span> <br>";
+        document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>All Commands Bought! You Have Unlocked:</span> <br> <span style='color:#ff0;'>Prestige</span> <br> <span style='color:#00fe40'>CSS MODE</span> <br>";
         shopCmds.push("buy: CSS MODE");
+        shopCmds.push("buy: prestige");
         return "poor";
     }
     console.log("Command purchased:", cmdText);
