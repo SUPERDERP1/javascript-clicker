@@ -12,7 +12,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"if(a > b) { return a; } else { return b; }", cost:45, profit: 25},
     {cmd:"switch(x) { case 1: semicolons += 10; break; default: semicolons += 5; }", cost:50, profit:30},
     {cmd:"class SemicolonMaster { constructor() { this.semicolons = 50; } }", cost:60, profit:40},
-    */
+    
     // New complex commands
     {cmd:"try { JSON.parse('{invalid: json}'); } catch(e) { semicolons += 20; }", cost:75, profit:70},
     {cmd:"async function fetchSemicolons() { let res = await fetch('api/semicolons'); semicolons += 25; }", cost:100, profit:90},
@@ -20,7 +20,7 @@ let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO 
     {cmd:"const calculate = (x, y) => x * y; semicolons += calculate(5, 6);", cost:150, profit:130},
     {cmd:"new Promise(resolve => setTimeout(() => { semicolons += 50; resolve(); }, 1000));", cost:200, profit:180},
     {cmd:"let map = new Map(); map.set('key', 100); semicolons += map.get('key');", cost:250, profit:230},
-    
+    */
     //Other
     {cmd:"CSS MODE", cost:1000, profit:0},
     {cmd:"prestige", cost:700, profit:0}
