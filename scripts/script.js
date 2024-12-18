@@ -170,7 +170,7 @@ function ownedCmds(directory) {
         dir = cmds.concat(["cd shop", "cd credits"]);
     } else if (directory === "shop") {
         //This line is very long. It takes every item in shop commands and adds the semicolon cost in green to the end, and adds cd main and cd shop to the command list
-        dir = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>").concat(["cd main", "cd credits"]); //adds cd main and cd credits to the command list
+        dir = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost * (prestigeCount + 1) + " Semicolons</span>").concat(["cd main", "cd credits"]); //adds cd main and cd credits to the command list
     } else if (directory === "credits") {
         dir = ["cd main", "cd shop"];
     } else {
