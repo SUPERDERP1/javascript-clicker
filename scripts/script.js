@@ -1,8 +1,9 @@
+let prestigeCount = 0;
 let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command 
     //attempting (and failing) a prestige system
-    {cmd:"console.log('i need semicolons');", cost:(10*(1.5*prestigeCount)), profit:3},
+    {cmd:"console.log('i need semicolons');", cost:10, profit:3},
     {cmd:"let semicolons = semicolons + 5;", cost:15, profit:5},
     {cmd:"semicolons += 8;", cost:20, profit:8},
     {cmd:"function giveMoney() {semicolons += 10;}", cost:25, profit:10},
@@ -75,7 +76,6 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             const allCmdsStr = allCmds.map(cmd => JSON.stringify(cmd)).join('<br>');
             const cmdsStr = cmds.join('<br>');
             const shopCmdsStr = shopCmds.join('<br>');
-            
             document.getElementById("cmdHistory").innerHTML += 
                 `DEBUG:<br>
                 semicolons:${semicolons}<br>
@@ -87,23 +87,23 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
         } else if (input === "CSS MODE" && cmds.includes("CSS MODE")) {
             console.log("CSS mode on");
             document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>CSS MODE ON</span> <br> Check shop and main for new commands";
-            cmds = ["color:#000;"];
-            allCmds = cssCmds;
+            cmds.push("color:#000;");
+            allCmds.push(cssCmds);
             shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => item.cmd !== "CSS MODE").map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
-            semicolons = 0;
             updateSemicolonsDisplay();
         } else if (input === "secretsaremeanttobehidden" && currentDirectory === "credits"){
-
             document.getElementById("directoryTitle").innerHTML = "ooo secrets";
             allCmds.pop(allCmds.length);
             cmds.pop(cmds.length);
-            semicolons -= 10000000000000000000;
+            semicolons -= 100000;
             updateSemicolonsDisplay();
-        }else if (input === "prestige") {
+        } else if (input === "prestige") {
            semicolons = 0;
            prestigeCount += 1;
            console.log("prestiged");
-        }else {
+        } else if (input === "debug CSS") {
+            shopCmds.push("buy: CSS MODE");
+        } else {
             document.getElementById("cmdHistory").innerHTML += "<span style='color:red;'>Invalid Command</span>" + "<br>";
             console.error("Unknown command:", input);
             return;
@@ -118,7 +118,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 // Function to handle shop purchases
 function processCommandShop(command) {
     const cmdText = command.split("buy: ")[1]; //finds the original command code which can interface with allCmds
-    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost; //finds the object in all Cmds that corresponds to the command and extracts the cost
+    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost * (prestigeCount + 1); //finds the object in all Cmds that corresponds to the command and extracts the cost
     const shopIndex = shopCmds.indexOf(command);
     console.log(cost);
     console.log(cmdText);
@@ -149,7 +149,7 @@ function processCommandShop(command) {
 function processCommand(command) {
     const using = allCmds.find(item => item.cmd === command); //extracts the object in allCmds corresponding to the command
     if (using) {
-        semicolons += using.profit; //finds the amount of money gained using said object
+        semicolons += using.profit * (prestigeCount + 1); //finds the amount of money gained using said object
     } else {
         console.error("Command not recognized:", command);
     }
