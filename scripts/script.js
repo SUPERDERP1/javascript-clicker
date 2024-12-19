@@ -42,9 +42,9 @@ let shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => !
 let prestigeCount = 0;
 let semicolons = 0;
 let currentDirectory = "main";
-
+let debug = false;
 // Prevents pasting commands
-document.getElementById("inputReader").addEventListener('paste', (event) => { event.preventDefault(); window.alert("no pasting code allowed");});
+document.getElementById("inputReader").addEventListener('paste', (event) => { if (!debug) {event.preventDefault(); window.alert("no pasting code allowed");}});
 
 // Event listener for handling form submissions (entering a command)
 document.getElementById("inputForm").addEventListener("submit", (event) => {
@@ -76,6 +76,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             const allCmdsStr = allCmds.map(cmd => JSON.stringify(cmd)).join('<br>');
             const cmdsStr = cmds.join('<br>');
             const shopCmdsStr = shopCmds.join('<br>');
+            debug = true;
             document.getElementById("cmdHistory").innerHTML += 
                 `DEBUG:<br>
                 semicolons:${semicolons}<br>
