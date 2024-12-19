@@ -1,4 +1,4 @@
-let allCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
+let startCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST TO BUY, profit:AMOUNT OF MONEY YOU GET BY USING IT} and everything else should be taken care of automatically
     //Example: {cmd:"test;", cost:400, profit:5},
     {cmd:"return;", cost:0, profit:1}, // Default command 
     {cmd:"console.log('i need semicolons');", cost:10, profit:3},
@@ -34,15 +34,17 @@ let cssCmds = [ //cmds for css mode WIP
     {cmd:".semicolons:target { overflow-x:var(--semicolons);}", cost:40, profit:20},
     {cmd:".semicolonsContainer .semicolons a:link {backdrop-filter: blur(calc(100vw - 30px));", cost:45, profit: 25}
 ];
-let newCmds = ["CSS MODE", "prestige"];
+let specialCmds = ["CSS MODE", "prestige"];
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
-let shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => !newCmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+let shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => !specialCmds.includes(item.cmd)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
 let prestigeCount = 0;
 let semicolons = 0;
 let currentDirectory = "main";
 let debug = false;
+let done = false;
+let allCmds = startCmds;
 // Prevents pasting commands
 document.getElementById("inputReader").addEventListener('paste', (event) => { if (!debug) {event.preventDefault(); window.alert("no pasting code allowed");}});
 
@@ -63,7 +65,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             if (!directories.includes(input.split("cd ")[1])) {
                 return;
             }
-        } else if (currentDirectory === "main" && cmds.includes(input) && !newCmds.includes(input)) {
+        } else if (currentDirectory === "main" && cmds.includes(input) && !specialCmds.includes(input)) {
             processCommand(input);
         } else if (currentDirectory === "shop" && shopCmds.includes(input)) {
             const bought = processCommandShop(input);
@@ -81,6 +83,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
                 `DEBUG:<br>
                 semicolons:${semicolons}<br>
                 currentDirectory:${currentDirectory}<br>
+                prestigecount:${prestigeCount}<br>
                 allCmds:<br>${allCmdsStr}<br>
                 cmds:<br>${cmdsStr}<br>
                 shopCmds:<br>${shopCmdsStr}<br>`;
@@ -98,7 +101,8 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
             semicolons = 0;
             prestigeCount += 1;
             cmds = ["return;"];
-            shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => !newCmds.includes(item.cmd) || !cssCmds.includes(item)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
+            allCmds = startCmds;
+            shopCmds = allCmds.filter(item => !cmds.includes(item.cmd)).filter(item => !specialCmds.includes(item.cmd) || !cssCmds.includes(item)).map((item) => "buy: " + item.cmd); // adds the buy: part to the shop commands
             console.log("prestiged");
             document.getElementById("cmdHistory").innerHTML = `<span style='color:#ff0;'>You Have Successfully Prestiged, Current Modifier: ${prestigeCount + 1} </span> <br>`;
             updateSemicolonsDisplay();
@@ -126,7 +130,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 // Function to handle shop purchases
 function processCommandShop(command) {
     const cmdText = command.split("buy: ")[1]; //finds the original command code which can interface with allCmds
-    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost * (prestigeCount + 1); //finds the object in all Cmds that corresponds to the command and extracts the cost
+    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost * ((prestigeCount ** 1.2) + 1); //finds the object in all Cmds that corresponds to the command and extracts the cost
     const shopIndex = shopCmds.indexOf(command);
     console.log(cost);
     console.log(cmdText);
@@ -140,12 +144,13 @@ function processCommandShop(command) {
         return "poor";
     }
 
-    if (shopCmds.length == 0) {
+    if (shopCmds.length == 0 && !done) {
         document.getElementById("cmdHistory").innerHTML += command + "<br>";
         document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>All Commands Bought! You Have Unlocked:</span> <br> <span style='color:#ff0;'>Prestige</span> <br> <span style='color:#00fe40'>CSS MODE</span> <br>";
         shopCmds.push("buy: CSS MODE");
         shopCmds.push("buy: prestige");
         return "poor";
+        let done = true;
     }
     console.log("Command purchased:", cmdText);
     if (!(document.getElementById("ownedCmdsWrap").innerHTML == "")) {
@@ -158,7 +163,7 @@ function processCommandShop(command) {
 function processCommand(command) {
     const using = allCmds.find(item => item.cmd === command); //extracts the object in allCmds corresponding to the command
     if (using) {
-        semicolons += using.profit * (prestigeCount + 1); //finds the amount of money gained using said object
+        semicolons += using.profit; //finds the amount of money gained using said object
     } else {
         console.error("Command not recognized:", command);
     }
