@@ -46,7 +46,10 @@ let debug = false;
 let done = false;
 let allCmds = startCmds;
 // Prevents pasting commands
-document.getElementById("inputReader").addEventListener('paste', (event) => { if (!debug) {event.preventDefault(); window.alert("no pasting code allowed");}});
+document.getElementById("inputReader").addEventListener('paste', (event) => { if (!debug) {
+    event.preventDefault(); 
+    window.alert("no pasting code allowed");
+}});
 
 // Event listener for handling form submissions (entering a command)
 document.getElementById("inputForm").addEventListener("submit", (event) => {
@@ -149,8 +152,8 @@ function processCommandShop(command) {
         document.getElementById("cmdHistory").innerHTML += "<span style='color:#00fe40'>All Commands Bought! You Have Unlocked:</span> <br> <span style='color:#ff0;'>Prestige</span> <br> <span style='color:#00fe40'>CSS MODE</span> <br>";
         shopCmds.push("buy: CSS MODE");
         shopCmds.push("buy: prestige");
-        return "poor";
         let done = true;
+        return "poor";
     }
     console.log("Command purchased:", cmdText);
     if (!(document.getElementById("ownedCmdsWrap").innerHTML == "")) {
