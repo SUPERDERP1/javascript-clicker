@@ -134,7 +134,7 @@ document.getElementById("inputForm").addEventListener("submit", (event) => {
 // Function to handle shop purchases
 function processCommandShop(command) {
     const cmdText = command.split("buy: ")[1]; //finds the original command code which can interface with allCmds
-    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost * ((prestigeCount ** 1.2) + 1); //finds the object in all Cmds that corresponds to the command and extracts the cost
+    const cost = allCmds.find(item => "buy: " + item.cmd === command).cost; //finds the object in all Cmds that corresponds to the command and extracts the cost
     const shopIndex = shopCmds.indexOf(command);
     console.log(cost);
     console.log(cmdText);
@@ -167,7 +167,7 @@ function processCommandShop(command) {
 function processCommand(command) {
     const using = allCmds.find(item => item.cmd === command); //extracts the object in allCmds corresponding to the command
     if (using) {
-        semicolons += using.profit; //finds the amount of money gained using said object
+        semicolons += using.profit * ((prestigeCount ** 1.2) + 1); //finds the amount of money gained using said object
     } else {
         console.error("Command not recognized:", command);
     }
@@ -194,7 +194,7 @@ function ownedCmds(directory) {
         dir = cmds.concat(["cd shop", "cd credits"]);
     } else if (directory === "shop") {
         //This line is very long. It takes every item in shop commands and adds the semicolon cost in green to the end, and adds cd main and cd shop to the command list
-        dir = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost * (prestigeCount + 1) + " Semicolons</span>").concat(["cd main", "cd credits"]); //adds cd main and cd credits to the command list
+        dir = shopCmds.map(item => item + " <span style='color:#00fe40;'>" + allCmds.find(it => "buy: " + it.cmd === item).cost + " Semicolons</span>").concat(["cd main", "cd credits"]); //adds cd main and cd credits to the command list
     } else if (directory === "credits") {
         dir = ["cd main", "cd shop"];
     } else {
