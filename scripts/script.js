@@ -35,6 +35,7 @@ let cssCmds = [ //cmds for css mode WIP
     {cmd:".semicolonsContainer .semicolons a:link {backdrop-filter: blur(calc(100vw - 30px));", cost:45, profit: 25}
 ];
 let specialCmds = ["CSS MODE", "prestige"];
+let allCmds = startCmds;
 // Starting commands (only "return;" is available by default)
 let cmds = ["return;"];
 const directories = ["main", "shop", "credits"];
@@ -44,7 +45,7 @@ let semicolons = 0;
 let currentDirectory = "main";
 let debug = false;
 let done = false;
-let allCmds = startCmds;
+
 // Prevents pasting commands
 document.getElementById("inputReader").addEventListener('paste', (event) => { if (!debug) {
     event.preventDefault(); 
