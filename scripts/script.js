@@ -26,7 +26,7 @@ let startCmds = [ // add a command in the form: {cmd:"COMMAND NAME", cost:COST T
 ];
 let cssCmds = [ //cmds for css mode WIP
     {cmd:"color:#000;", cost:0, profit:1}, // Default command
-    {cmd:"!important", cost:15, profit:3},
+    {cmd:"background-color:#COLOR;", cost:15, profit:0, property:"bg",},
     {cmd:"@import url('https://example.com');", cost:15, profit:5},
     {cmd:":root {--semicolons: 1000;}", cost:25, profit:10},
     {cmd:"@media only screen and (max-width:1000px)", cost:30, profit:12},
@@ -171,7 +171,12 @@ function processCommand(command) {
     } else {
         console.error("Command not recognized:", command);
     }
-
+    if (using.property) {
+        if(using.property === "bg") {
+            let color = input.split("background-color:").split(";")[1];
+            HTML.style.backgroundColor = color;
+        }
+    }
     updateSemicolonsDisplay();
 }
 
